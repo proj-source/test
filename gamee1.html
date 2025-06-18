@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Green Trash Catcher</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Tone.js CDN for dynamic sound effects and music -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color:#8fbc8f;  /* Light green background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden; /* Prevent body scroll if content overruns */
+            color: #333; /* Default text color */
+        }
+
+        /* Game Container */
+        .game-container {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            padding: 15px; /* Minimized padding */
+            text-align: center;
+            width: 95%; /* Increased responsive width */
+            max-width: 480px; /* Minimized max-width for desktop (was 600px) */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px; /* Minimized space between elements (was 15px) */
+            margin: 20px auto;
+            position: relative; /* Needed for positioning overlay */
+        }
+
+        h1 {
+            color: #2e7d32; /* Dark green heading */
+            font-size: 1.8rem; /* Minimized heading font size (was 2rem) */
+            margin-top: 0;
+            margin-bottom: 5px; /* Minimized margin */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* Game Canvas */
+        #gameCanvas {
+            background-color: #c8e6c9; /* Lighter green for game background */
+            border-radius: 12px;
+            border: 3px solid #2e7d32; /* Stronger border */
+            display: block;
+            touch-action: none; /* Prevent browser touch actions on canvas */
+            width: 100%; /* Make canvas responsive within its container */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        /* Game UI & Info Bar */
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 3px 8px; /* Minimized padding */
+            font-size: 1rem; /* Minimized font size (was 1.1rem) */
+            font-weight: 600;
+            color: #388e3c; /* Medium green for info text */
+        }
+
+        .game-status {
+            font-size: 1.2rem; /* Minimized font size (was 1.3rem) */
+            font-weight: 700;
+            color: #d32f2f; /* Red for game over */
+            margin: 8px 0; /* Minimized margin */
+        }
+
+        /* Buttons Styling */
+        .game-buttons {
+            display: flex;
+            gap: 8px; /* Minimized gap (was 10px) */
+            justify-content: center;
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+            width: 100%;
+            padding: 0 5px; /* Added slight padding */
+            box-sizing: border-box; /* Include padding in element's total width */
+        }
+
+        .game-buttons button {
+            background: linear-gradient(145deg, #4CAF50, #388e3c); /* Green gradient */
+            color: white;
+            border: none;
+            padding: 8px 18px; /* Minimized padding (was 10px 20px) */
+            border-radius: 8px;
+            font-size: 0.95rem; /* Minimized font size (was 1rem) */
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-grow: 1; /* Allow buttons to grow */
+            max-width: 160px; /* Minimized max width for individual buttons (was 180px) */
+            min-width: 90px; /* Ensure buttons don't get too small */
+        }
+
+        .game-buttons button:hover {
+            background: linear-gradient(145deg, #388e3c, #2e7d32); /* Darker green on hover */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .game-buttons button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Specific style for hidden elements */
+        .hidden {
+            display: none !important;
+        }
+
+        /* --- Pre-Game Overlay & Countdown Styling --- */
+        .pre-game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white background */
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10; /* Above other game elements but below game container buttons */
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 10px; /* Minimized padding for overlay content */
+            box-sizing: border-box;
+        }
+
+        .pre-game-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .pre-game-overlay h2 {
+            font-size: 1.4rem; /* Minimized */
+            color: #2e7d32;
+            margin-bottom: 0.6rem; /* Minimized */
+        }
+
+        .pre-game-overlay p {
+            font-size: 0.9rem; /* Minimized */
+            color: #555;
+            line-height: 1.3; /* Slightly tighter line height */
+            max-width: 90%; /* Wider on small screens */
+            margin-bottom: 1rem; /* Minimized */
+            text-align: center;
+        }
+
+        #countdownDisplay {
+            font-size: 3rem; /* Minimized */
+            font-weight: 900; /* Extra bold */
+            color: #4CAF50; /* Green countdown */
+            animation: pulse 1s infinite alternate; /* Simple pulse animation */
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); opacity: 1; }
+            to { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        /* Style for the new Ready button */
+        #readyButton {
+            background: linear-gradient(145deg, #2196F3, #1976D2); /* Blue gradient for a different feel */
+            color: white;
+            border: none;
+            padding: 8px 20px; /* Minimized padding */
+            border-radius: 8px;
+            font-size: 1rem; /* Minimized */
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.6rem; /* Minimized space above the button */
+        }
+
+        #readyButton:hover {
+            background: linear-gradient(145deg, #1976D2, #0D47A1);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        #readyButton:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Mobile specific adjustments (further minimized for very small screens) */
+        @media (max-width: 600px) {
+            .game-container {
+                padding: 8px; /* Further reduced padding */
+                border-radius: 8px; /* Slightly smaller radius */
+                width: 98%;
+                margin: 5px auto; /* Reduced margin */
+            }
+            h1 {
+                font-size: 1.4rem;
+                margin-bottom: 3px;
+            }
+            .game-info {
+                font-size: 0.85rem;
+                padding: 2px 4px;
+            }
+            .game-status {
+                font-size: 1rem;
+                margin: 3px 0;
+            }
+            .game-buttons {
+                gap: 5px; /* Even smaller gap */
+            }
+            .game-buttons button {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+                max-width: 100px;
+            }
+            .pre-game-overlay h2 {
+                font-size: 1.2rem;
+            }
+            .pre-game-overlay p {
+                font-size: 0.75rem;
+            }
+            #countdownDisplay {
+                font-size: 2rem;
+            }
+            #readyButton {
+                font-size: 0.85rem;
+                padding: 6px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>GreenPulse Trash Catcher ♻️</h1>
+        <div class="game-info">
+            <span>Score: <span id="scoreDisplay">0</span></span>
+            <span>Lives: <span id="livesDisplay">3</span></span>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        <div id="gameStatus" class="game-status hidden">Game Over!</div>
+        <div class="game-buttons">
+            <button id="startGameBtn">Start Game</button>
+            <button id="restartGameBtn" class="hidden">Restart Game</button>
+            <button id="pauseGameBtn" class="hidden">Pause Game</button>
+            <button id="resumeGameBtn" class="hidden">Resume Game</button>
+            <button id="exitGameBtn" class="hidden">Exit Game</button>
+        </div>
+
+        <div id="preGameOverlay" class="pre-game-overlay">
+            <div id="instructionsContent">
+                <h2>Get Ready!</h2>
+                <p><center>
+                    Use **Left/Right keys** (or A/D) on desktop or *drag your finger* on mobile to move the recycling bin.
+                    Catch the trash to score points! Don't let it hit the ground!
+                </p></center>
+                <button id="readyButton">Ready!</button>
+            </div>
+            <p id="countdownDisplay" class="hidden"></p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const livesDisplay = document.getElementById('livesDisplay');
+        const gameStatusDisplay = document.getElementById('gameStatus');
+        const startGameBtn = document.getElementById('startGameBtn');
+        const restartGameBtn = document.getElementById('restartGameBtn');
+        const pauseGameBtn = document.getElementById('pauseGameBtn');
+        const resumeGameBtn = document.getElementById('resumeGameBtn');
+        const exitGameBtn = document.getElementById('exitGameBtn');
+        const preGameOverlay = document.getElementById('preGameOverlay');
+        const instructionsContent = document.getElementById('instructionsContent');
+        const readyButton = document.getElementById('readyButton');
+        const countdownDisplay = document.getElementById('countdownDisplay');
+
+        // Game Configuration
+        const GAME_WIDTH_REF = 400;
+        const GAME_HEIGHT_REF = 500;
+        const PLAYER_SIZE_FACTOR = 0.15;
+        const TRASH_SIZE_FACTOR = 0.08;
+        const PLAYER_SPEED_REF = 7;
+        const INITIAL_TRASH_SPEED_REF = 2;
+        const INITIAL_SPAWN_INTERVAL = 1000; // ms
+        const MAX_FALLING_ITEMS = 15;
+        const DIFFICULTY_INCREASE_SCORE = 10;
+        const COUNTDOWN_TIME = 3;
+
+        // Game State
+        let player = { x: 0, y: 0, width: 0, height: 0, dx: 0 };
+        let fallingItems = [];
+        let score = 0;
+        let lives = 3;
+        let gameRunning = false;
+        let gameOver = false;
+        let paused = false;
+        let animationFrameId;
+        let lastSpawnTime = 0;
+        let currentTrashSpeed = INITIAL_TRASH_SPEED_REF;
+        let currentSpawnInterval = INITIAL_SPAWN_INTERVAL;
+        let countdownTimer = COUNTDOWN_TIME;
+        let countdownIntervalId;
+
+        // Emojis for the game elements
+        const PLAYER_EMOJI = '🗑️';
+        const TRASH_EMOJIS = ['🥤', '📰', '🍾', '🥫', '🍎', '🍌'];
+
+        // --- Tone.js Sound Setup ---
+        let catchSound;
+        let loseLifeSound;
+        let gameOverMelody;
+        let backgroundMusic; // Will hold the Tone.js Sequence for background music
+
+        // Initialize audio context and create synths
+        function initAudio() {
+            // Fun and bouncy sound for catching items
+            catchSound = new Tone.MembraneSynth({
+                pitchDecay: 0.05,
+                octaves: 2,
+                envelope: {
+                    attack: 0.001,
+                    decay: 0.4,
+                    sustain: 0.01,
+                    release: 0.8
+                }
+            }).toDestination();
+
+            // A short, descending "sad" playful sound for losing a life
+            loseLifeSound = new Tone.Synth({
+                oscillator: {
+                    type: "sine"
+                },
+                envelope: {
+                    attack: 0.01,
+                    decay: 0.4,
+                    sustain: 0.05,
+                    release: 0.5
+                }
+            }).toDestination();
+
+            // A dedicated synth for the game over melody
+            const gameOverSynth = new Tone.Synth({
+                oscillator: { type: "square" },
+                envelope: { attack: 0.02, decay: 0.2, sustain: 0.1, release: 0.5 }
+            }).toDestination();
+
+            // A fun, short melody for game over
+            gameOverMelody = new Tone.Sequence(
+                (time, note) => {
+                    gameOverSynth.triggerAttackRelease(note, "8n", time);
+                },
+                ["C5", "G4", "A4", "F4", "E4", "D4", "C4"], // A playful, slightly resolving melody
+                "8n" // Each note lasts an 8th note
+            );
+            gameOverMelody.loop = false; // Ensure it plays once
+
+            // A dedicated synth for the background music - changed to a Polysynth for richer sound
+            const backgroundMusicSynth = new Tone.PolySynth(Tone.Synth, {
+                oscillator: { type: "triangle" },
+                envelope: { attack: 0.05, decay: 0.5, sustain: 0.2, release: 1 }
+            }).toDestination();
+
+            // More upbeat and playful background music - now with chords!
+            backgroundMusic = new Tone.Sequence(
+                (time, notes) => {
+                    backgroundMusicSynth.triggerAttackRelease(notes, "4n", time);
+                },
+                [
+                    ["C4", "E4", "G4"],   // C major chord
+                    ["F4", "A4", "C5"],   // F major chord
+                    ["G4", "B4", "D5"],   // G major chord
+                    ["C4", "E4", "G4"]    // C major chord
+                ],
+                "1n" // Each chord lasts a whole note, creating a slow, fun progression
+            );
+            backgroundMusic.loop = true; // Loop continuously
+        }
+
+        // --- Canvas Setup ---
+        function setCanvasSize() {
+            const containerWidth = canvas.parentElement.offsetWidth;
+            const actualCanvasWidth = containerWidth - (2 * parseFloat(getComputedStyle(canvas.parentElement).paddingLeft));
+
+            canvas.width = actualCanvasWidth;
+            canvas.height = (GAME_HEIGHT_REF / GAME_WIDTH_REF) * actualCanvasWidth;
+
+            const scaleFactor = canvas.width / GAME_WIDTH_REF;
+
+            player.width = GAME_WIDTH_REF * PLAYER_SIZE_FACTOR * scaleFactor;
+            player.height = player.width * 0.7;
+            player.y = canvas.height - player.height - (10 * scaleFactor);
+
+            if (!gameRunning || player.x === 0 || player.x + player.width > canvas.width) {
+                 player.x = (canvas.width / 2) - (player.width / 2);
+            } else {
+                player.x = player.x * (canvas.width / (canvas.width / scaleFactor));
+                player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
+            }
+
+            fallingItems.forEach(item => {
+                item.size = TRASH_SIZE_FACTOR * GAME_WIDTH_REF * scaleFactor;
+                item.x = item.x * (canvas.width / (canvas.width / scaleFactor));
+                item.y = item.y * (canvas.height / (canvas.height / scaleFactor));
+                item.speed = INITIAL_TRASH_SPEED_REF * scaleFactor;
+            });
+
+            player.scaledSpeed = PLAYER_SPEED_REF * scaleFactor;
+        }
+
+        setCanvasSize();
+
+        window.addEventListener('resize', setCanvasSize);
+
+        // --- Drawing Functions ---
+        function drawPlayer() {
+            ctx.font = `${player.height * 0.9}px 'Inter'`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(PLAYER_EMOJI, player.x + player.width / 2, player.y + player.height / 2);
+        }
+
+        function drawFallingItem(item) {
+            ctx.font = `${item.size * 0.9}px 'Inter'`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(item.emoji, item.x + item.size / 2, item.y + item.size / 2);
+        }
+
+        function drawGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPlayer();
+            fallingItems.forEach(drawFallingItem);
+
+            scoreDisplay.textContent = score;
+            livesDisplay.textContent = lives;
+
+            if (gameOver) {
+                gameStatusDisplay.textContent = `Game Over! Final Score: ${score}`;
+                gameStatusDisplay.classList.remove('hidden');
+            } else if (paused) {
+                gameStatusDisplay.textContent = 'Game Paused';
+                gameStatusDisplay.classList.remove('hidden');
+            } else {
+                gameStatusDisplay.classList.add('hidden');
+            }
+        }
+
+        // --- Game Logic Functions ---
+        function spawnFallingItem() {
+            if (fallingItems.length >= MAX_FALLING_ITEMS) return;
+
+            const scaleFactor = canvas.width / GAME_WIDTH_REF;
+            const itemSize = TRASH_SIZE_FACTOR * GAME_WIDTH_REF * scaleFactor;
+            const itemSpeed = currentTrashSpeed * scaleFactor;
+
+            const randomEmoji = TRASH_EMOJIS[Math.floor(Math.random() * TRASH_EMOJIS.length)];
+
+            const newItem = {
+                x: Math.random() * (canvas.width - itemSize),
+                y: -itemSize,
+                size: itemSize,
+                speed: itemSpeed,
+                emoji: randomEmoji
+            };
+            fallingItems.push(newItem);
+        }
+
+        function updateGameLogic() {
+            player.x += player.dx;
+            if (player.x < 0) player.x = 0;
+            if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
+
+            for (let i = fallingItems.length - 1; i >= 0; i--) {
+                const item = fallingItems[i];
+                item.y += item.speed;
+
+                const playerHitboxPadding = player.width * 0.2;
+                const trashHitboxPadding = item.size * 0.2;
+
+                if (
+                    item.x + trashHitboxPadding < player.x + player.width - playerHitboxPadding &&
+                    item.x + item.size - trashHitboxPadding > player.x + playerHitboxPadding &&
+                    item.y + trashHitboxPadding < player.y + player.height - playerHitboxPadding &&
+                    item.y + item.size - trashHitboxPadding > player.y + playerHitboxPadding
+                ) {
+                    score++;
+                    catchSound.triggerAttackRelease("C5", "8n"); // Fun catch sound
+                    if (score % DIFFICULTY_INCREASE_SCORE === 0 && score !== 0) {
+                        currentTrashSpeed += 0.5;
+                        currentSpawnInterval = Math.max(200, currentSpawnInterval - 50);
+                        console.log(`Difficulty increased! Speed: ${currentTrashSpeed}, Interval: ${currentSpawnInterval}`);
+                    }
+                    fallingItems.splice(i, 1);
+                }
+                else if (item.y > canvas.height) {
+                    lives--;
+                    loseLifeSound.triggerAttackRelease("G3", "8n"); // Play a "sad boop" for losing a life
+                    fallingItems.splice(i, 1);
+                    if (lives <= 0) {
+                        endGame();
+                    }
+                }
+            }
+
+            const currentTime = performance.now();
+            if (currentTime - lastSpawnTime > currentSpawnInterval) {
+                spawnFallingItem();
+                lastSpawnTime = currentTime;
+            }
+        }
+
+        function gameLoop() {
+            if (!gameRunning || gameOver || paused) {
+                return;
+            }
+
+            updateGameLogic();
+            drawGame();
+            animationFrameId = requestAnimationFrame(gameLoop);
+        }
+
+        function _actualStartGame() {
+            score = 0;
+            lives = 3;
+            fallingItems = [];
+            setCanvasSize();
+
+            player.x = (canvas.width / 2) - (player.width / 2);
+
+            currentTrashSpeed = INITIAL_TRASH_SPEED_REF;
+            currentSpawnInterval = INITIAL_SPAWN_INTERVAL;
+            gameRunning = true;
+            gameOver = false;
+            paused = false;
+
+            gameStatusDisplay.classList.add('hidden');
+            startGameBtn.classList.add('hidden');
+            restartGameBtn.classList.remove('hidden');
+            pauseGameBtn.classList.remove('hidden');
+            resumeGameBtn.classList.add('hidden');
+            exitGameBtn.classList.remove('hidden');
+
+            drawGame();
+            lastSpawnTime = performance.now();
+            gameLoop();
+
+            // Start Tone.js Transport and background music
+            if (Tone.context.state !== 'running') {
+                Tone.start().then(() => {
+                    backgroundMusic.volume.value = -20; // Set volume
+                    Tone.Transport.start();
+                    backgroundMusic.start();
+                }).catch(e => console.error("Failed to start Tone.js context:", e));
+            } else {
+                backgroundMusic.volume.value = -20; // Set volume
+                Tone.Transport.start();
+                backgroundMusic.start();
+            }
+        }
+
+        function beginCountdownProcess() {
+            // Tone.start() on user interaction to unlock audio
+            if (Tone.context.state !== 'running') {
+                Tone.start().then(() => {
+                    playCountdownSound();
+                }).catch(e => console.error("Failed to start Tone.js context:", e));
+            } else {
+                playCountdownSound();
+            }
+
+            instructionsContent.classList.add('hidden');
+            readyButton.classList.add('hidden');
+            countdownDisplay.classList.remove('hidden');
+            countdownDisplay.textContent = countdownTimer;
+
+            countdownIntervalId = setInterval(() => {
+                countdownTimer--;
+                if (countdownTimer > 0) {
+                    countdownDisplay.textContent = countdownTimer;
+                    playCountdownSound(); // Play sound for each countdown tick
+                } else if (countdownTimer === 0) {
+                    countdownDisplay.textContent = 'GO!';
+                    catchSound.triggerAttackRelease("C6", "8n"); // A cheerful 'Go!' sound
+                } else {
+                    clearInterval(countdownIntervalId);
+                    preGameOverlay.classList.remove('visible');
+                    preGameOverlay.classList.add('hidden');
+
+                    canvas.style.display = 'block';
+                    document.querySelector('.game-info').classList.remove('hidden');
+                    _actualStartGame();
+                }
+            }, 1000);
+        }
+
+        function playCountdownSound() {
+            catchSound.triggerAttackRelease("C5", "32n"); // A short, percussive click for countdown
+        }
+
+        function startGame() {
+            gameRunning = false;
+            gameOver = false;
+            paused = false;
+
+            countdownTimer = COUNTDOWN_TIME;
+            clearInterval(countdownIntervalId);
+
+            preGameOverlay.classList.remove('hidden');
+            preGameOverlay.classList.add('visible');
+            instructionsContent.classList.remove('hidden');
+            readyButton.classList.remove('hidden');
+            countdownDisplay.classList.add('hidden');
+
+            canvas.style.display = 'none';
+            document.querySelector('.game-info').classList.add('hidden');
+            startGameBtn.classList.add('hidden');
+            restartGameBtn.classList.add('hidden');
+            pauseGameBtn.classList.add('hidden');
+            resumeGameBtn.classList.add('hidden');
+            exitGameBtn.classList.add('hidden');
+            gameStatusDisplay.classList.add('hidden');
+
+            // Stop any playing Tone.js music/melodies
+            if (backgroundMusic && Tone.Transport.state === 'started') {
+                backgroundMusic.stop();
+                Tone.Transport.stop();
+            }
+            if (gameOverMelody && Tone.Transport.state === 'started') {
+                gameOverMelody.stop();
+            }
+        }
+
+        function pauseGame() {
+            if (gameRunning && !gameOver && !paused) {
+                paused = true;
+                cancelAnimationFrame(animationFrameId);
+                pauseGameBtn.classList.add('hidden');
+                resumeGameBtn.classList.remove('hidden');
+                drawGame();
+                if (backgroundMusic && Tone.Transport.state === 'started') {
+                    backgroundMusic.stop(); // Pause background music
+                    Tone.Transport.stop(); // Stop transport when paused
+                }
+            }
+        }
+
+        function resumeGame() {
+            if (gameRunning && !gameOver && paused) {
+                paused = false;
+                resumeGameBtn.classList.add('hidden');
+                pauseGameBtn.classList.remove('hidden');
+                lastSpawnTime = performance.now();
+                gameLoop();
+                if (backgroundMusic) {
+                     // Restart Tone.js Transport and background music
+                    if (Tone.context.state !== 'running') {
+                        Tone.start().then(() => {
+                            Tone.Transport.start();
+                            backgroundMusic.start();
+                        }).catch(e => console.error("Failed to resume Tone.js context:", e));
+                    } else {
+                        Tone.Transport.start();
+                        backgroundMusic.start();
+                    }
+                }
+            }
+        }
+
+        function endGame() {
+            gameRunning = false;
+            gameOver = true;
+            cancelAnimationFrame(animationFrameId);
+            gameStatusDisplay.classList.remove('hidden');
+            restartGameBtn.classList.remove('hidden');
+            startGameBtn.classList.add('hidden');
+            pauseGameBtn.classList.add('hidden');
+            resumeGameBtn.classList.add('hidden');
+            exitGameBtn.classList.remove('hidden');
+            drawGame();
+            if (backgroundMusic && Tone.Transport.state === 'started') {
+                backgroundMusic.stop(); // Stop background music
+                Tone.Transport.stop(); // Stop transport when game ends
+            }
+            if (gameOverMelody) {
+                // Ensure Tone.js context is running to play game over sound
+                if (Tone.context.state !== 'running') {
+                    Tone.start().then(() => {
+                        gameOverMelody.start();
+                    }).catch(e => console.error("Failed to start Tone.js context for game over sound:", e));
+                } else {
+                    gameOverMelody.start(); // Play fun game over sound sequence
+                }
+            }
+        }
+
+         // NEW FUNCTION: Handle exit to home page
+        function exitToHomePage() {
+            if (confirm('Are you sure you want to exit to the home page? Your current game progress will be lost.')) {
+                window.location.href = 'index.html'; // Redirect to index.html
+            }
+        }
+
+        // --- Custom Modal for Alerts (replacing native alert/confirm) ---
+        const customModal = document.createElement('div');
+        customModal.className = 'modal-overlay hidden';
+        customModal.innerHTML = `
+            <div class="modal-content">
+                <button class="modal-close-btn">&times;</button>
+                <h3 id="customModalTitle"></h3>
+                <p id="customModalMessage"></p>
+                <div id="customModalButtons" class="modal-buttons"></div>
+            </div>
+        `;
+        document.body.appendChild(customModal);
+
+        // Basic modal CSS (can be integrated into main style block)
+        const modalStyle = document.createElement('style');
+        modalStyle.textContent = `
+            .modal-overlay {
+                position: fixed;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
+            .modal-overlay.visible {
+                opacity: 1;
+                visibility: visible;
+            }
+            .modal-content {
+                background: white;
+                padding: 2rem;
+                border-radius: 12px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                text-align: center;
+                max-width: 450px;
+                width: 90%;
+                position: relative;
+                transform: translateY(-20px);
+                opacity: 0;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+            .modal-overlay.visible .modal-content {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            .modal-content h3 {
+                color: #2e7d32;
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+            .modal-content p {
+                color: #555;
+                margin-bottom: 1.5rem;
+                font-size: 1.1rem;
+            }
+            .modal-buttons {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+            .modal-buttons button {
+                padding: 0.8rem 1.5rem;
+                border-radius: 8px;
+                border: none;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 1rem;
+                transition: background-color 0.2s ease, transform 0.2s ease;
+            }
+            .modal-buttons button.primary {
+                background-color: #4CAF50;
+                color: white;
+            }
+            .modal-buttons button.primary:hover {
+                background-color: #388e3c;
+                transform: translateY(-1px);
+            }
+            .modal-buttons button.secondary {
+                background-color: #e0e0e0;
+                color: #333;
+            }
+            .modal-buttons button.secondary:hover {
+                background-color: #bdbdbd;
+                transform: translateY(-1px);
+            }
+            .modal-close-btn {
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                font-size: 1.8rem;
+                color: #aaa;
+                cursor: pointer;
+                background: none;
+                border: none;
+                line-height: 1;
+                padding: 0;
+                transition: color 0.2s ease;
+            }
+            .modal-close-btn:hover {
+                color: #666;
+            }
+
+            @media (max-width: 600px) {
+                .modal-content {
+                    padding: 1.2rem;
+                    border-radius: 10px;
+                }
+                .modal-content h3 {
+                    font-size: 1.4rem;
+                }
+                .modal-content p {
+                    font-size: 0.95rem;
+                }
+                .modal-buttons button {
+                    padding: 0.7rem 1rem;
+                    font-size: 0.9rem;
+                }
+            }
+        `;
+        document.head.appendChild(modalStyle);
+
+
+        function showCustomModal(title, message, buttons = []) {
+            const modalTitle = document.getElementById('customModalTitle');
+            const modalMessage = document.getElementById('customModalMessage'); // Use the correct ID for modal message
+            const modalButtonsContainer = document.getElementById('customModalButtons');
+            const closeBtn = customModal.querySelector('.modal-close-btn');
+
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modalButtonsContainer.innerHTML = ''; // Clear existing buttons
+
+            buttons.forEach(btnConfig => {
+                const button = document.createElement('button');
+                button.textContent = btnConfig.text;
+                button.className = btnConfig.className || 'primary';
+                button.onclick = () => {
+                    hideCustomModal();
+                    if (btnConfig.handler) {
+                        btnConfig.handler();
+                    }
+                };
+                modalButtonsContainer.appendChild(button);
+            });
+
+            closeBtn.onclick = hideCustomModal; // Make close button work
+            customModal.classList.add('visible');
+        }
+
+        function hideCustomModal() {
+            customModal.classList.remove('visible');
+        }
+
+        // --- End Custom Modal ---
+
+        // --- Event Listeners ---
+        startGameBtn.addEventListener('click', startGame);
+        restartGameBtn.addEventListener('click', startGame);
+        pauseGameBtn.addEventListener('click', pauseGame);
+        resumeGameBtn.addEventListener('click', resumeGame);
+        readyButton.addEventListener('click', beginCountdownProcess);
+        exitGameBtn.addEventListener('click', exitToHomePage);
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            if (gameRunning && !paused) {
+                const scaledPlayerSpeed = player.scaledSpeed;
+                if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') {
+                    player.dx = -scaledPlayerSpeed;
+                } else if (e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') {
+                    player.dx = scaledPlayerSpeed;
+                }
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a' || e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') {
+                player.dx = 0;
+            }
+        });
+
+        // Touch controls (for mobile)
+        let touchStartX = 0;
+        let lastPlayerXOnTouch = 0;
+
+        canvas.addEventListener('touchstart', (e) => {
+            if (gameRunning && !paused && e.touches.length === 1) {
+                touchStartX = e.touches[0].clientX;
+                lastPlayerXOnTouch = player.x;
+                player.dx = 0; // Stop any existing movement
+                e.preventDefault(); // Prevent scrolling
+            }
+        }, { passive: false });
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (gameRunning && !paused && e.touches.length === 1) {
+                const touchCurrentX = e.touches[0].clientX;
+                const touchDiffPixels = touchCurrentX - touchStartX;
+
+                // Calculate movement relative to canvas width for responsiveness
+                const proportionMoved = touchDiffPixels / canvas.width;
+                player.x = lastPlayerXOnTouch + (proportionMoved * canvas.width);
+
+                // Boundary checks
+                player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
+
+                e.preventDefault(); // Prevent scrolling
+            }
+        }, { passive: false });
+
+        canvas.addEventListener('touchend', () => {
+            player.dx = 0; // Stop movement when touch ends
+        });
+
+        // Initial setup when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initAudio(); // Initialize Tone.js audio components
+            setCanvasSize(); // Call setCanvasSize here to ensure correct initial sizing
+
+            drawGame(); // Draw initial state of player/emojis
+            canvas.style.display = 'none';
+            document.querySelector('.game-info').classList.add('hidden');
+            pauseGameBtn.classList.add('hidden');
+            resumeGameBtn.classList.add('hidden');
+            restartGameBtn.classList.add('hidden');
+            exitGameBtn.classList.add('hidden'); // Keep Exit hidden initially
+            startGameBtn.classList.remove('hidden'); // Ensure Start Game button is visible
+            preGameOverlay.classList.remove('hidden'); // Show overlay initially
+            preGameOverlay.classList.add('visible'); // Make sure overlay is visible on load
+            instructionsContent.classList.remove('hidden'); // Ensure instructions are visible
+            readyButton.classList.remove('hidden'); // Ensure ready button is visible
+            countdownDisplay.classList.add('hidden'); // Ensure countdown display is hidden
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Go Green Survey System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Universal Box Sizing for better layout control */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        /* Keyframe animations for a polished look */
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* General Body & Layout Styles */
+        body {
+            font-family: 'Poppins', sans-serif; /* Modern, clean font */
+            background-image:
+                linear-gradient(rgba(240, 253, 240, 0.6), rgba(220, 255, 220, 0.6)), /* Slightly softer overlay */
+                url('photo_2025-06-17_13-36-56.jpg'); /* Your uploaded photo */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center; /* Center the background image */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6; /* Improved readability */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        /* Custom Navbar Styles */
+        .custom-navbar {
+            background: linear-gradient(to right, #1a5e2f, #2e7d32); /* Darker green gradient */
+            padding: 0.8rem 1.5rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow for depth */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1000;
+            position: sticky;
+            top: 0;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+        }
+
+        .custom-navbar-brand {
+            color: #e6ffe6; /* Light green for brand text */
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Space between icon and text */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .custom-navbar-brand .leaf-icon {
+            width: 25px;
+            height: 25px;
+            fill: #a2e8a2; /* Lighter green for the leaf icon */
+            vertical-align: middle;
+            transition: transform 0.3s ease;
+        }
+
+        .custom-navbar-brand:hover .leaf-icon {
+            transform: rotate(8deg) scale(1.05); /* Subtle rotation and scale on hover */
+        }
+
+        .custom-nav-links {
+            display: flex;
+            gap: 20px; /* Space between nav items */
+            align-items: center;
+        }
+
+        .custom-nav-links a {
+            color: #e6ffe6;
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif; /* Consistent font */
+            font-size: 1.4rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 7px;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+        }
+
+        .custom-nav-links a.active,
+        .custom-nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+            color: #ffffff;
+            transform: translateY(-1px); /* Slight lift effect */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+
+        .gamified-btn {
+            background: linear-gradient(to right, #ff6b6b, #ee2e85); /* Pink/Red gradient */
+            color: #ffffff !important; /* Ensure white text */
+            font-weight: 700;
+            padding: 0.6rem 1.2rem !important; /* Larger padding */
+            font-size: 1.3rem !important; /* Larger font size */
+            border-radius: 30px !important; /* Pill shape */
+            box-shadow: 0 5px 12px rgba(255, 107, 107, 0.3); /* Soft shadow */
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        .gamified-btn:hover {
+            background: linear-gradient(to right, #ee2e85, #ff6b6b); /* Reverse gradient on hover */
+            transform: translateY(-3px) scale(1.02) !important; /* More pronounced lift and scale */
+            box-shadow: 0 8px 15px rgba(255, 107, 107, 0.4) !important; /* Stronger shadow on hover */
+        }
+
+        .gamified-btn .game-icon {
+            width: 20px;
+            height: 20px;
+            fill: #ffffff;
+        }
+
+        /* Header styling with animation */
+        header {
+            background-color: #2e7d32; /* Dark green header */
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            animation: fadeInDown 1s ease forwards;
+            font-weight: 700;
+            font-size: 2rem;
+            user-select: none; /* Prevent text selection */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Main content container */
+        main {
+            padding: 1rem; /* Adjusted for smaller screens */
+            max-width: 900px;
+            width: 95%; /* More responsive width */
+            margin: 1.5rem auto; /* Center with top/bottom margin */
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-grow: 1; /* Allow main to grow and fill space */
+        }
+
+        /* Headings styling */
+        h2, h3 {
+            color: #2e7d32; /* Green headings */
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem; /* Adjusted for mobile */
+        }
+
+        /* Survey topic buttons styling */
+        .survey-options button {
+            display: block;
+            width: 100%;
+            margin: 0.5rem 0;
+            padding: 1rem;
+            border: none;
+            background: #66bb6a; /* Medium green button */
+            color: white;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            font-weight: 600;
+        }
+        .survey-options button:hover {
+            background: #388e3c; /* Darker green on hover */
+            transform: scale(1.02); /* Subtle scale effect */
+            box-shadow: 0 4px 10px rgba(56, 142, 60, 0.7);
+        }
+
+        /* Footer action buttons */
+        .footer-actions {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically on all screens */
+            gap: 0.75rem; /* Space between buttons */
+        }
+        .footer-actions button {
+            padding: 0.75rem;
+            border-radius: 8px;
+            background-color: #aed581; /* Lighter green */
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .footer-actions button:hover {
+            background-color: #8bc34a; /* Medium green on hover */
+            transform: translateY(-2px); /* Lift effect */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .footer-actions button.hidden { /* Hide button if it has this class */
+            display: none;
+        }
+
+        /* Progress bar styling */
+        .progress-container {
+            margin-bottom: 0.5rem;
+            text-align: right;
+            color: #555;
+            font-weight: 500;
+        }
+        .progress-bar {
+            width: 100%;
+            background: #c8e6c9;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+            height: 12px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .progress-bar div {
+            width: 0%;
+            height: 100%;
+            background: #2e7d32;
+            transition: width 0.4s ease;
+            border-radius: 8px;
+        }
+
+        /* Survey form and input styling */
+        .survey-form {
+            display: none;
+            margin-top: 1.5rem; /* Adjusted for smaller screens */
+            animation: fadeIn 0.5s ease forwards;
+        }
+        .survey-form label {
+            display: block;
+            margin: 1rem 0 0.5rem;
+            font-weight: 600;
+            color: #388e3c;
+        }
+        .survey-form input[type="text"],
+        .survey-form input[type="range"],
+        .survey-form select,
+        .survey-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .survey-form input:focus,
+        .survey-form select:focus,
+        .survey-form textarea:focus {
+            outline: none;
+            border-color: #2e7d32;
+            box-shadow: 0 0 8px #2e7d3250;
+        }
+        .survey-form button[type="submit"] {
+            margin-top: 1.5rem;
+            background-color: #43a047;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            width: 100%; /* Full width for submit button */
+        }
+        .survey-form button[type="submit"]:hover {
+            background-color: #2e7d32;
+            transform: translateY(-2px);
+        }
+        .hidden {
+            display: none;
+        }
+
+        /* Multi-select checkbox styling */
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            user-select: none;
+            font-weight: normal;
+            color: #4CAF50;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .checkbox-group label:hover {
+            background-color: #e6ffe6;
+        }
+        .checkbox-group label.selected {
+            background-color: #d4edda;
+            border-color: #2e7d32;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+        .checkbox-group input[type="radio"] {
+            width: 1.2em;
+            height: 1.2em;
+            margin-right: 0.5em;
+            flex-shrink: 0;
+        }
+
+        /* Emoji for slider */
+        .slider-emoji {
+            font-size: 1.8rem;
+            margin-left: 10px;
+            vertical-align: middle;
+            user-select: none;
+            line-height: 1;
+        }
+
+        /* Styling for the "Back to Main Page" link */
+        .back-btn {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .back-btn a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .back-btn a:hover {
+            color: #388e3c;
+            transform: translateX(-5px);
+        }
+
+        /* Required field indicator */
+        .required-indicator::after {
+            content: ' *';
+            color: red;
+        }
+        /* Specific error message styling */
+        .error-message {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            text-align: left;
+        }
+
+        /* Custom Modal Styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: white;
+            padding: 1.5rem; /* Adjusted for mobile */
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            position: relative;
+        }
+        .modal-overlay.visible .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .modal-content h3 {
+            font-size: 1.5rem; /* Adjusted for mobile */
+            margin-bottom: 1rem;
+        }
+        .modal-content p {
+            font-size: 1rem; /* Adjusted for mobile */
+            margin-bottom: 1.5rem;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem; /* Adjusted for mobile */
+            flex-wrap: wrap;
+        }
+        .modal-buttons button {
+            padding: 0.7rem 1.2rem; /* Adjusted for mobile */
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.95rem; /* Adjusted for mobile */
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            flex-grow: 1; /* Allow buttons to grow */
+        }
+        .modal-buttons button.primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .modal-buttons button.primary:hover {
+            background-color: #388e3c;
+            transform: translateY(-1px);
+        }
+        .modal-buttons button.secondary {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        .modal-buttons button.secondary:hover {
+            background-color: #bdbdbd;
+            transform: translateY(-1px);
+        }
+        /* Close button for modals */
+        .modal-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.8rem;
+            color: #aaa;
+            cursor: pointer;
+            background: none;
+            border: none;
+            line-height: 1;
+            padding: 0;
+            transition: color 0.2s ease;
+        }
+        .modal-close-btn:hover {
+            color: #666;
+        }
+
+        /* Style for validation error on input */
+        input.invalid, select.invalid, textarea.invalid {
+            border-color: #ef4444;
+            box-shadow: 0 0 5px rgba(239, 68, 68, 0.5);
+        }
+
+        /* Styles for textarea within modal */
+        .modal-content textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            resize: vertical;
+            min-height: 100px;
+        }
+        .modal-content textarea:focus {
+            outline: none;
+            border-color: #2e7d32;
+            box-shadow: 0 0 8px #2e7d3250;
+        }
+        .modal-content .modal-buttons button.mt-4 {
+            margin-top: 1rem;
+        }
+
+        /* NEW STYLES FOR ANONYMOUS OPTION AND NAME INPUT */
+        .modal-content .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .modal-content .form-group label {
+            display: block;
+            margin: 0 0 0.5rem 0;
+            font-weight: 600;
+            color: #388e3c;
+        }
+
+        .modal-content .form-group input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .modal-content .form-group input[type="text"]:focus {
+            outline: none;
+            border-color: #2e7d32;
+            box-shadow: 0 0 8px #2e7d3250;
+        }
+        .modal-content .form-group input[type="text"]:disabled {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
+        }
+
+        /* Professional styling for the anonymous checkbox */
+        .modal-content .anonymous-option {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+        }
+        .modal-content .anonymous-option input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 1.4em;
+            height: 1.4em;
+            border: 2px solid #66bb6a;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .modal-content .anonymous-option input[type="checkbox"]:checked {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        .modal-content .anonymous-option input[type="checkbox"]:checked::after {
+            content: '✔';
+            font-size: 1em;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            line-height: 1;
+        }
+
+        .modal-content .anonymous-option label {
+            margin: 0;
+            font-weight: normal;
+            color: #555;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .modal-content .anonymous-option label:hover {
+            color: #2e7d32;
+        }
+
+        /* Thank You Message Styling */
+        .thank-you-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            border: 2px dashed #66bb6a;
+            border-radius: 12px;
+            margin-top: 2rem;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        .thank-you-message h3 {
+            font-size: 1.8rem; /* Adjusted for mobile */
+            color: #2e7d32;
+            margin-bottom: 1rem;
+        }
+        .thank-you-message p {
+            font-size: 1.1rem; /* Adjusted for mobile */
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        .thank-you-message button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .thank-you-message button:hover {
+            background-color: #388e3c;
+            transform: translateY(-2px);
+        }
+
+        /* Styles for the feedback display section */
+        #feedbackDisplayArea {
+            margin-top: 2rem; /* Adjusted for mobile */
+            padding: 1rem; /* Adjusted for mobile */
+            background: #f0fdf4;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        #feedbackDisplayArea h3 {
+            font-size: 1.4rem; /* Adjusted for mobile */
+            margin-bottom: 1rem; /* Adjusted for mobile */
+        }
+
+        .feedback-item {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 0.8rem; /* Adjusted for mobile */
+            margin-bottom: 0.8rem; /* Adjusted for mobile */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feedback-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .feedback-item strong {
+            color: #388e3c;
+            font-size: 1em; /* Adjusted for mobile */
+            margin-bottom: 0.15rem; /* Adjusted for mobile */
+        }
+
+        .feedback-item p {
+            margin: 0.4rem 0; /* Adjusted for mobile */
+            color: #444;
+            flex-grow: 1;
+        }
+
+        .feedback-item .meta {
+            font-size: 0.8em; /* Adjusted for mobile */
+            color: #777;
+            align-self: flex-end;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 0.8rem 0; /* Adjusted for mobile */
+            margin-top: auto;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem; /* Adjusted for mobile */
+        }
+
+        /* --- Media Queries for Mobile Responsiveness --- */
+
+        /* Small devices (phones, 600px and down) */
+        @media only screen and (max-width: 600px) {
+            .custom-navbar {
+                flex-direction: column; /* Stack items vertically */
+                align-items: flex-start; /* Align brand to left */
+                padding: 0.5rem 1rem;
+            }
+
+            .custom-navbar-brand {
+                font-size: 1.8rem; /* Smaller brand text */
+                margin-bottom: 0.5rem; /* Space below brand */
+            }
+
+            .custom-nav-links {
+                flex-direction: column; /* Stack nav links */
+                width: 100%; /* Full width for nav links container */
+                gap: 5px; /* Smaller gap between stacked links */
+                align-items: flex-start; /* Align links to left */
+                margin-top: 0.5rem;
+            }
+
+            .custom-nav-links a {
+                width: 100%; /* Full width for each nav link */
+                text-align: left; /* Align text left */
+                padding: 0.6rem 1rem; /* Increase padding for touch */
+                font-size: 1.1rem; /* Smaller font for nav links */
+            }
+
+            .gamified-btn {
+                width: 100%; /* Full width for game button */
+                margin-top: 10px; /* Space above game button */
+                text-align: center; /* Center text within button */
+                justify-content: center; /* Center content horizontally */
+                font-size: 1.1rem !important; /* Smaller font for game button */
+                padding: 0.7rem 1rem !important;
+            }
+
+            header h1 {
+                font-size: 1.8rem; /* Smaller header on mobile */
+            }
+
+            main {
+                padding: 0.8rem; /* Reduced padding for main content */
+                width: 98%; /* Slightly wider main content on small screens */
+                margin: 1rem auto;
+            }
+
+            h2, h3 {
+                font-size: 1.3rem; /* Smaller headings */
+            }
+
+            .survey-form input[type="text"],
+            .survey-form input[type="range"],
+            .survey-form select,
+            .survey-form textarea,
+            .survey-form button[type="submit"] {
+                padding: 0.8rem; /* Slightly more padding for touch targets */
+                font-size: 1.05rem; /* Slightly larger font for inputs */
+            }
+
+            .modal-content {
+                width: 95%; /* Wider modal on very small screens */
+                padding: 1rem; /* Reduced modal padding */
+            }
+
+            .modal-buttons button {
+                padding: 0.6rem 1rem; /* Smaller modal buttons */
+                font-size: 0.9rem;
+            }
+
+            .thank-you-message h3 {
+                font-size: 1.6rem;
+            }
+            .thank-you-message p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Medium devices (tablets, 601px to 900px) */
+        @media only screen and (min-width: 601px) and (max-width: 900px) {
+            .custom-navbar {
+                padding: 0.7rem 1.2rem;
+            }
+            .custom-navbar-brand {
+                font-size: 2rem;
+            }
+            .custom-nav-links a {
+                font-size: 1.2rem;
+            }
+            .gamified-btn {
+                font-size: 1.2rem !important;
+                padding: 0.5rem 1rem !important;
+            }
+            header h1 {
+                font-size: 1.9rem;
+            }
+            main {
+                padding: 1.5rem;
+                width: 90%;
+            }
+            h2, h3 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="custom-navbar">
+    <a href="index.html" class="custom-navbar-brand">
+        <svg class="leaf-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.025 0c-4.482 0-8.106 3.624-8.106 8.106 0 2.241 0.908 4.275 2.376 5.768l-8.775 8.775c-0.208 0.208-0.208 0.546 0 0.754s0.546 0.208 0.754 0l8.775-8.775c1.493 1.468 3.527 2.376 5.768 2.376 4.482 0 8.106-3.624 8.106-8.106s-3.624-8.106-8.106-8.106zM17.025 15.212c-3.921 0-7.106-3.185-7.106-7.106s3.185-7.106 7.106-7.106 7.106 3.185 7.106 7.106-3.185 7.106-7.106 7.106z" />
+        </svg>
+        GreenPulse
+    </a>
+    <div class="custom-nav-links">
+      <a href="index.html" id="home-nav">Home</a>
+      <a href="about us.html" id="about-us-nav">About Us</a>
+      <a href="InfoGraphic.html" id="view-infographic-nav">Infographic</a>
+      <a href="GoGreen (1).html" id="take-a-survey-nav">Survey</a>
+      <a href="gamee1.html" class="gamified-btn" id="start-game-btn">
+        <svg class="game-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM11 16H9V14H11V16ZM11 10H9V8H11V10ZM15 10H13V8H15V10ZM15 16H13V14H15V16Z" fill="currentColor" />
+        </svg>
+        Start Game
+      </a>
+    </div>
+</nav>
+
+<header>
+    <h1>Welcome to Go Green Park Survey 🌳✨</h1>
+</header>
+<main>
+    <h2>Choose a Survey Topic</h2>
+    <div class="progress-container">
+        <span id="progressText">Progress: 0%</span>
+        <div class="progress-bar" aria-label="Progress Bar">
+            <div id="progressBarFill"></div>
+        </div>
+    </div>
+    <div class="survey-options" id="surveyTopicOptions">
+        <button onclick="startSurvey('Behavior')">🌿 Behavior Survey</button>
+        <button onclick="startSurvey('Safety')">🛡️ Safety Survey</button>
+        <button onclick="startSurvey('Wellness')">🌞 Wellness Survey</button>
+    </div>
+
+    <form class="survey-form" id="surveyForm" onsubmit="submitSurvey(event)">
+        <h3 id="surveyTitle"></h3>
+
+        <label for="park-location" class="required-indicator">Select Park Location:</label>
+        <select id="park-location" required onchange="renderQuestions()">
+            <option value="" disabled selected>-- Choose a park --</option>
+            <option value="bukit-kerinchi">Bukit Kerinchi</option>
+            <option value="taman-alam-impian">Taman Alam Impian</option>
+            <option value="elmina">Elmina</option>
+        </select>
+        <span id="park-location-error" class="error-message"></span>
+
+        <div id="dynamicQuestions" style="margin-top:1rem;"></div>
+
+        <button type="submit" id="submit-btn">Submit</button>
+    </form>
+
+    <div id="thankYouMessage" class="thank-you-message">
+        <h3>Thank You for Your Feedback! 🎉</h3>
+        <p>Your responses are greatly appreciated and will help us make Go Green Park even better for everyone.</p>
+        <button onclick="resetAndShowTopicOptions()">Start New Survey</button>
+    </div>
+
+    <div class="footer-actions">
+        <button id="shareResultsBtn" class="hidden" onclick="showShareModal()">📤 Share Results</button>
+        <button onclick="showSuggestionFeedbackModal()">💡 Leave a Suggestion/Feedback</button>
+        <button onclick="handleExit()">🚪 Exit</button>
+    </div>
+
+    <div id="feedbackDisplayArea">
+        <h3>Recent Suggestions & Feedback</h3>
+        <p id="noFeedbackMessage">No feedback submitted yet. Be the first!</p>
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2024 Go Green Survey System. All rights reserved.</p>
+</footer>
+
+<canvas id="confettiCanvas" style="position:fixed;pointer-events:none;top:0;left:0;width:100vw;height:100vh;z-index:9999;"></canvas>
+
+<div id="customModal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close-btn" onclick="hideModal()">&times;</button>
+        <h3 id="modalTitle"></h3>
+        <p id="modalMessage"></p>
+        <div class="modal-buttons">
+        </div>
+    </div>
+</div>
+
+<div id="feedbackModal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close-btn" id="closeFeedbackModalBtn">&times;</button>
+        <h3>Submit Your Feedback</h3>
+        <div class="form-group">
+            <label for="feedbackText">Your Suggestion/Feedback:</label>
+            <textarea id="feedbackText" rows="5" placeholder="Enter your feedback here..." required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="userName">Your Name:</label>
+            <input type="text" id="userName" placeholder="Optional">
+        </div>
+        <div class="anonymous-option">
+            <input type="checkbox" id="anonymousCheckbox">
+            <label for="anonymousCheckbox">Submit Anonymously</label>
+        </div>
+        <div class="modal-buttons">
+            <button class="secondary" id="cancelFeedbackSubmitBtn">Cancel</button>
+            <button class="primary" id="submitFeedbackBtn">Submit Feedback</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentTopic = null;
+    let lastSubmittedSurveyData = null; // Stores data from the last completed survey
+    const progressBarFill = document.getElementById('progressBarFill');
+    const progressText = document.getElementById('progressText'); // New: Progress text element
+    const confettiCanvas = document.getElementById('confettiCanvas');
+    const ctx = confettiCanvas.getContext('2d');
+    let confettiPieces = [];
+    let confettiAnimationFrame;
+
+    // References for the custom modal elements (general purpose)
+    const customModal = document.getElementById('customModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalButtons = customModal.querySelector('.modal-buttons');
+
+    // References for main sections and buttons
+    const surveyTopicOptions = document.getElementById('surveyTopicOptions');
+    const surveyForm = document.getElementById('surveyForm');
+    const thankYouMessage = document.getElementById('thankYouMessage');
+    const shareResultsBtn = document.getElementById('shareResultsBtn'); // New: Share results button
+
+    // References for the Feedback Modal
+    const feedbackModal = document.getElementById('feedbackModal');
+    const openFeedbackModalBtn = document.querySelector('.footer-actions button:nth-child(2)'); // "Leave a Suggestion/Feedback" button
+    const closeFeedbackModalBtn = document.getElementById('closeFeedbackModalBtn');
+    const cancelFeedbackSubmitBtn = document.getElementById('cancelFeedbackSubmitBtn');
+    const submitFeedbackBtn = document.getElementById('submitFeedbackBtn');
+    const userNameInput = document.getElementById('userName');
+    const anonymousCheckbox = document.getElementById('anonymousCheckbox');
+    const feedbackTextarea = document.getElementById('feedbackText');
+    const feedbackDisplayArea = document.getElementById('feedbackDisplayArea');
+    const noFeedbackMessage = document.getElementById('noFeedbackMessage');
+
+
+    // Function to resize confetti canvas to fit the window
+    function resizeCanvas() {
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas(); // Initial resize
+
+    // Confetti piece class for animation
+    class Confetti {
+        constructor() {
+            this.x = Math.random() * confettiCanvas.width;
+            this.y = Math.random() * confettiCanvas.height - confettiCanvas.height; // Start above canvas
+            this.size = (Math.random() * 8) + 4; // Random size
+            this.speed = (Math.random() * 3) + 2; // Random fall speed
+            this.angle = Math.random() * 2 * Math.PI; // Random rotation angle
+            this.color = `hsl(${Math.random() * 360}, 100%, 60%)`; // Random bright color
+            this.spin = (Math.random() - 0.5) * 0.1; // Random spin direction
+        }
+        update() {
+            this.y += this.speed;
+            this.angle += this.spin;
+            // Reset confetti piece if it falls off screen
+            if (this.y > confettiCanvas.height) {
+                this.y = 0 - this.size;
+                this.x = Math.random() * confettiCanvas.width;
+            }
+        }
+        draw() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle);
+            ctx.fillStyle = this.color;
+            ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size); // Draw rectangular confetti
+            ctx.restore();
+        }
+    }
+
+    // Initialize confetti pieces
+    function createConfetti() {
+        confettiPieces = [];
+        for (let i = 0; i < 150; i++) {
+            confettiPieces.push(new Confetti());
+        }
+    }
+
+    // Animation loop for confetti
+    function runConfetti() {
+        ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height); // Clear canvas
+        confettiPieces.forEach(piece => {
+            piece.update();
+            piece.draw();
+        });
+        confettiAnimationFrame = requestAnimationFrame(runConfetti); // Loop animation
+    }
+
+    // Start confetti for a given duration
+    function startConfetti(duration = 3000) {
+        createConfetti();
+        runConfetti();
+        setTimeout(() => {
+            cancelAnimationFrame(confettiAnimationFrame); // Stop animation
+            ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height); // Clear canvas completely
+        }, duration);
+    }
+
+    // Function to start a new survey topic
+    function startSurvey(topic) {
+        currentTopic = topic;
+        document.getElementById('surveyTitle').textContent = `${topic} Survey`;
+        surveyTopicOptions.style.display = 'none'; // Hide topic selection
+        surveyForm.style.display = 'block'; // Show the survey form
+        thankYouMessage.style.display = 'none'; // Hide thank you message
+        shareResultsBtn.classList.add('hidden'); // Hide share button until survey is complete
+        document.getElementById('park-location').value = ''; // Reset park location dropdown
+        document.getElementById('dynamicQuestions').innerHTML = ''; // Clear previous questions
+        updateProgress(25); // Initial progress after selecting topic
+        // Scroll to the survey form smoothly
+        window.scrollTo({ top: surveyForm.offsetTop, behavior: 'smooth' });
+        clearValidationErrors(); // Clear any previous validation errors
+
+        // MULA PEMBETULAN: Paparkan soalan sebaik sahaja topik dipilih
+        renderQuestions();
+        // TAMAT PEMBETULAN
+    }
+
+    // Function to update the progress bar and text
+    function updateProgress(percent) {
+        progressBarFill.style.width = percent + '%';
+        progressText.textContent = `Progress: ${percent}%`;
+    }
+
+    // Define survey questions by topic
+    const surveyQuestions = {
+        Behavior: [
+            { id: 'reuse', label: 'Do you practice reuse of materials?', type: 'radio', options: ['Yes', 'Sometimes', 'No'] },
+            { id: 'recycle', label: 'Do you separate your waste for recycling?', type: 'radio', options: ['Yes', 'Sometimes', 'No'] },
+            { id: 'litter', label: 'Have you seen littering in the park?', type: 'radio', options: ['Often', 'Sometimes', 'Rarely', 'Never'] },
+            { id: 'plastic-reduction', label: 'How often do you avoid single-use plastics (e.g., bring your own bottle/bag)?', type: 'radio', options: ['Always', 'Most of the time', 'Sometimes', 'Rarely'] }, // New question
+            { id: 'park-cleanup-participation', label: 'Have you participated in any park cleanup events?', type: 'radio', options: ['Yes, recently', 'Yes, in the past', 'No, but would like to', 'Never'] }, // New question
+        ],
+        Safety: [
+            { id: 'safe-feeling', label: 'Do you feel safe walking in the park?', type: 'radio', options: ['Always', 'Most of the time', 'Sometimes', 'Never'] },
+            { id: 'lighting', label: 'How would you rate the lighting in the park?', type: 'slider', min: 1, max: 5 },
+            { id: 'security-guards', label: 'Are there enough security guards?', type: 'radio', options: ['Yes', 'No', 'Not sure'] },
+            { id: 'emergency-info', label: 'Is emergency information clearly displayed in the park?', type: 'radio', options: ['Yes', 'No', 'Not sure'] }, // New question
+            { id: 'equipment-condition', label: 'How would you rate the condition of park equipment (e.g., benches, swings)?', type: 'slider', min: 1, max: 5 }, // New question
+        ],
+        Wellness: [
+            { id: 'exercise-frequency', label: 'How often do you exercise in the park?', type: 'radio', options: ['Daily', 'Weekly', 'Monthly', 'Rarely'] },
+            { id: 'green-space', label: 'Does the park have enough green space?', type: 'radio', options: ['Yes', 'No'] },
+            { id: 'mood-slider', label: 'How does visiting the park affect your mood?', type: 'slider', min: 1, max: 5 },
+            { id: 'quiet-zones', label: 'Are there sufficient quiet zones for relaxation?', type: 'radio', options: ['Yes', 'No', 'Somewhat'] }, // New question
+            { id: 'tranquility-level', label: 'How would you rate the overall sense of tranquility in the park?', type: 'slider', min: 1, max: 5 }, // New question
+        ],
+    };
+
+    // Emojis for slider values (from 1 to 5)
+    const sliderEmojis = ['😞', '😐', '🙂', '😀', '😄'];
+
+    // Renders questions based on selected topic and park location
+    function renderQuestions() {
+        const park = document.getElementById('park-location').value;
+        const container = document.getElementById('dynamicQuestions');
+        container.innerHTML = ''; // Clear existing questions
+        clearValidationErrors(); // Clear errors when re-rendering questions
+
+        // If no park is selected yet, still render questions (but don't advance progress beyond 25%)
+        // This is part of the flow improvement.
+        if (!currentTopic) { // If no topic selected, exit
+            updateProgress(0);
+            return;
+        }
+
+
+        // Show questions for the current topic
+        const questions = surveyQuestions[currentTopic];
+        questions.forEach(q => {
+            let questionHTML = `
+                <div>
+                  <label for="${q.id}" class="required-indicator">${q.label}</label>
+            `; // All questions are required
+
+            if (q.type === 'radio') {
+                questionHTML += '<div class="checkbox-group">';
+                q.options.forEach(opt => {
+                    // Attach event listener to label for visual feedback
+                    questionHTML += `<label><input type="radio" name="${q.id}" value="${opt}" required
+                                    onclick="this.parentElement.classList.add('selected');
+                                             Array.from(this.parentElement.parentElement.children).forEach(lbl => {
+                                                 if(lbl !== this.parentElement) lbl.classList.remove('selected');
+                                             });"> ${opt}</label>`;
+                });
+                questionHTML += '</div>';
+                questionHTML += `<span id="${q.id}-error" class="error-message"></span>`; // Error message span for radio group
+            }
+            else if (q.type === 'slider') {
+                questionHTML += `
+                    <input type="range" min="${q.min}" max="${q.max}" value="${Math.floor((q.max + q.min) / 2)}" id="${q.id}" name="${q.id}" required oninput="updateEmoji('${q.id}-emoji', this.value)" />
+                    <span id="${q.id}-emoji" class="slider-emoji">${sliderEmojis[2]}</span>
+                    <span id="${q.id}-error" class="error-message"></span> `;
+            }
+            questionHTML += `</div>`; // Close the div for this question block
+            container.insertAdjacentHTML('beforeend', questionHTML); // Add question HTML to container
+        });
+        // Calculate progress based on number of questions
+        // Only update progress beyond 25% if a park is actually selected
+        if (park) {
+            const totalQuestions = 1 + questions.length; // 1 for park location + dynamic questions
+            const answeredQuestions = 1; // Park location is selected at this point
+            updateProgress(Math.floor((answeredQuestions / totalQuestions) * 100));
+        }
+    }
+
+    // Updates the emoji next to the slider based on its value
+    function updateEmoji(spanId, val) {
+        const emojiIndex = Math.min(Math.max(val - 1, 0), sliderEmojis.length - 1);
+        document.getElementById(spanId).textContent = sliderEmojis[emojiIndex];
+    }
+
+    // Function to show the custom modal (general purpose)
+    function showModal(title, messageHtml, buttons) {
+        modalTitle.textContent = title;
+        modalMessage.innerHTML = messageHtml; // Use innerHTML to allow custom content
+        modalButtons.innerHTML = ''; // Clear previous buttons
+
+        if (buttons && buttons.length > 0) {
+            buttons.forEach(btn => {
+                const buttonElement = document.createElement('button');
+                buttonElement.textContent = btn.text;
+                buttonElement.className = btn.className;
+                buttonElement.onclick = () => {
+                    hideModal();
+                    if (btn.handler) {
+                        btn.handler();
+                    }
+                };
+                modalButtons.appendChild(buttonElement);
+            });
+        }
+        customModal.classList.add('visible');
+    }
+
+    // Function to hide the custom modal (general purpose)
+    function hideModal() {
+        customModal.classList.remove('visible');
+        modalTitle.textContent = '';
+        modalMessage.innerHTML = '';
+        modalButtons.innerHTML = '';
+    }
+
+    // --- Feedback Modal Functions ---
+    function showSuggestionFeedbackModal() {
+        feedbackModal.classList.add('visible');
+        feedbackTextarea.value = ''; // Clear feedback text
+        userNameInput.value = ''; // Clear name
+        anonymousCheckbox.checked = false; // Uncheck anonymous
+        userNameInput.disabled = false; // Enable name input
+        userNameInput.placeholder = 'Optional'; // Reset placeholder
+    }
+
+    function hideSuggestionFeedbackModal() {
+        feedbackModal.classList.remove('visible');
+    }
+
+    // Event Listeners for Feedback Modal
+    openFeedbackModalBtn.addEventListener('click', showSuggestionFeedbackModal);
+    closeFeedbackModalBtn.addEventListener('click', hideSuggestionFeedbackModal);
+    cancelFeedbackSubmitBtn.addEventListener('click', hideSuggestionFeedbackModal);
+
+    // Close feedback modal if clicking outside the content
+    feedbackModal.addEventListener('click', (event) => {
+        if (event.target === feedbackModal) {
+            hideSuggestionFeedbackModal();
+        }
+    });
+
+    anonymousCheckbox.addEventListener('change', () => {
+        if (anonymousCheckbox.checked) {
+            userNameInput.value = '';
+            userNameInput.disabled = true;
+            userNameInput.placeholder = 'Name will be anonymous';
+        } else {
+            userNameInput.disabled = false;
+            userNameInput.placeholder = 'Optional';
+        }
+    });
+
+    submitFeedbackBtn.addEventListener('click', () => {
+        const feedbackText = feedbackTextarea.value.trim();
+        let userName = userNameInput.value.trim();
+
+        if (feedbackText === '') {
+            // Using a custom modal for alert-like messages
+            showModal('Input Required', 'Please enter your feedback before submitting.', [
+                { text: 'OK', className: 'primary' }
+            ]);
+            return;
+        }
+
+        if (anonymousCheckbox.checked) {
+            userName = 'Anonymous';
+        } else if (userName === '') {
+            userName = 'Anonymous'; // Default to Anonymous if name is empty and not checked
+        }
+
+        // Create a new feedback item element
+        const newFeedbackItem = document.createElement('div');
+        newFeedbackItem.classList.add('feedback-item');
+
+        const now = new Date();
+        const formattedDate = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+
+        newFeedbackItem.innerHTML = `
+            <strong>${userName}</strong>
+            <p>${feedbackText}</p>
+            <div class="meta">Submitted on ${formattedDate}</div>
+        `;
+
+        // Check if the "No feedback submitted yet" message exists and remove it
+        if (noFeedbackMessage) {
+            noFeedbackMessage.style.display = 'none'; // Hide the message
+        }
+
+        // Add the new feedback item to the top of the list in the display area
+        const feedbackListContainer = feedbackDisplayArea;
+        const firstFeedbackItem = feedbackListContainer.querySelector('.feedback-item');
+        if (firstFeedbackItem) {
+            feedbackListContainer.insertBefore(newFeedbackItem, firstFeedbackItem);
+        } else {
+            feedbackListContainer.appendChild(newFeedbackItem);
+        }
+
+        hideSuggestionFeedbackModal(); // Close the modal after submission
+        showModal('Thank You!', 'Your feedback has been submitted successfully.', [
+            { text: 'OK', className: 'primary' }
+        ]); // Use custom modal for confirmation
+    });
+
+    // --- End Feedback Modal Functions ---
+
+
+    // Submits the survey form
+    function submitSurvey(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        clearValidationErrors(); // Clear previous errors
+
+        const parkLocation = document.getElementById('park-location');
+        if (parkLocation.value === '') {
+            displayError(parkLocation, 'Please select a park location.');
+            return;
+        }
+
+        const questions = surveyQuestions[currentTopic];
+        const surveyData = {
+            topic: currentTopic,
+            parkLocation: parkLocation.value,
+            responses: {}
+        };
+        let allQuestionsAnswered = true;
+
+        questions.forEach(q => {
+            const inputElement = document.getElementById(q.id);
+            if (q.type === 'radio') {
+                const selectedRadio = document.querySelector(`input[name="${q.id}"]:checked`);
+                if (!selectedRadio) {
+                    displayError(inputElement, 'Please select an option.');
+                    allQuestionsAnswered = false;
+                } else {
+                    surveyData.responses[q.id] = selectedRadio.value;
+                }
+            } else if (q.type === 'slider') {
+                surveyData.responses[q.id] = inputElement.value;
+            } else { // For textareas, text inputs (though none currently in this survey)
+                if (inputElement.value.trim() === '') {
+                    displayError(inputElement, 'This field is required.');
+                    allQuestionsAnswered = false;
+                } else {
+                    surveyData.responses[q.id] = inputElement.value.trim();
+                }
+            }
+        });
+
+        if (!allQuestionsAnswered) {
+            showModal('Validation Error', 'Please answer all required questions.', [
+                { text: 'OK', className: 'primary' }
+            ]);
+            return;
+        }
+
+        // If all validations pass
+        lastSubmittedSurveyData = surveyData; // Store the data
+        console.log('Survey Submitted:', surveyData);
+
+        surveyForm.style.display = 'none'; // Hide the form
+        thankYouMessage.style.display = 'block'; // Show thank you message
+        shareResultsBtn.classList.remove('hidden'); // Show share results button
+        updateProgress(100); // Set progress to 100%
+        startConfetti(); // Trigger confetti animation
+
+        // Scroll to the thank you message
+        window.scrollTo({ top: thankYouMessage.offsetTop, behavior: 'smooth' });
+    }
+
+    // Resets the form and shows topic options
+    function resetAndShowTopicOptions() {
+        surveyForm.reset(); // Reset form fields
+        document.getElementById('dynamicQuestions').innerHTML = ''; // Clear dynamic questions
+        surveyForm.style.display = 'none'; // Hide survey form
+        thankYouMessage.style.display = 'none'; // Hide thank you message
+        surveyTopicOptions.style.display = 'block'; // Show topic selection again
+        shareResultsBtn.classList.add('hidden'); // Hide share button
+        updateProgress(0); // Reset progress
+        lastSubmittedSurveyData = null; // Clear last submitted data
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+    }
+
+    // Function to display validation error
+    function displayError(inputElement, message) {
+        let errorSpan;
+        // For radio groups, the error span is next to the group
+        if (inputElement.type === 'radio') {
+            const name = inputElement.name;
+            errorSpan = document.getElementById(`${name}-error`);
+            if (!errorSpan) {
+                // If it doesn't exist, create it (should ideally exist from renderQuestions)
+                errorSpan = document.createElement('span');
+                errorSpan.id = `${name}-error`;
+                errorSpan.classList.add('error-message');
+                inputElement.closest('.checkbox-group').after(errorSpan);
+            }
+            // Add invalid class to all radio buttons in the group
+            document.querySelectorAll(`input[name="${name}"]`).forEach(radio => radio.classList.add('invalid'));
+        } else {
+            errorSpan = document.getElementById(`${inputElement.id}-error`);
+            inputElement.classList.add('invalid');
+        }
+        if (errorSpan) {
+            errorSpan.textContent = message;
+            errorSpan.style.display = 'block';
+        }
+    }
+
+    // Function to clear all validation errors
+    function clearValidationErrors() {
+        document.querySelectorAll('.error-message').forEach(span => {
+            span.textContent = '';
+            span.style.display = 'none';
+        });
+        document.querySelectorAll('.invalid').forEach(input => {
+            input.classList.remove('invalid');
+        });
+        document.querySelectorAll('.checkbox-group label.selected').forEach(label => {
+            label.classList.remove('selected');
+        });
+    }
+
+    // Shows a shareable summary of the last survey data
+    function showShareModal() {
+        if (!lastSubmittedSurveyData) {
+            showModal('No Survey Data', 'Please complete a survey first to see results.', [
+                { text: 'OK', className: 'primary' }
+            ]);
+            return;
+        }
+
+        let summaryHtml = `
+            <strong>Topic:</strong> ${lastSubmittedSurveyData.topic}<br>
+            <strong>Park Location:</strong> ${lastSubmittedSurveyData.parkLocation}<br><br>
+            <strong>Your Responses:</strong><br>
+        `;
+
+        for (const questionId in lastSubmittedSurveyData.responses) {
+            const questionValue = lastSubmittedSurveyData.responses[questionId];
+            // Find the original label for the question
+            const questionConfig = surveyQuestions[lastSubmittedSurveyData.topic].find(q => q.id === questionId);
+            const questionLabel = questionConfig ? questionConfig.label.replace(':', '') : questionId; // Remove ':' for cleaner display
+
+            let displayValue = questionValue;
+            if (questionConfig && questionConfig.type === 'slider') {
+                displayValue = `${questionValue} ${sliderEmojis[questionValue - 1] || ''}`;
+            }
+
+            summaryHtml += `<strong>- ${questionLabel}:</strong> ${displayValue}<br>`;
+        }
+
+        showModal('Your Survey Summary', summaryHtml, [
+            { text: 'Copy to Clipboard', className: 'primary', handler: () => copyToClipboard(summaryHtml) },
+            { text: 'Done', className: 'secondary' }
+        ]);
+    }
+
+    // Copies text to clipboard (stripping HTML for plain text)
+    function copyToClipboard(htmlContent) {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = htmlContent;
+        const plainText = tempDiv.innerText; // Get plain text from HTML
+
+        // Use document.execCommand('copy') for broader compatibility in iframes
+        const textarea = document.createElement('textarea');
+        textarea.value = plainText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            showModal('Copied!', 'Survey summary copied to clipboard!', [{ text: 'OK', className: 'primary' }]);
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+            showModal('Copy Failed', 'Failed to copy. Please try manually.', [{ text: 'OK', className: 'primary' }]);
+        }
+        document.body.removeChild(textarea);
+    }
+
+    function handleExit() {
+        showModal('Exit Confirmation', 'Are you sure you want to exit? Your current survey progress will be lost.', [
+            { text: 'Yes, Exit', className: 'primary', handler: () => {
+                // This will close the current tab/window if it was opened by script,
+                // otherwise, it might prompt the user or do nothing due to browser security.
+                window.close();
+            }},
+            { text: 'Cancel', className: 'secondary' }
+        ]);
+    }
+
+    // Function to navigate to different sections/pages (for navbar)
+    function showPage(pageId) {
+        console.log(`Navigating to ${pageId}`);
+        if (pageId === 'home-page') {
+            window.location.href = 'index.html';
+        }
+        // Add more page navigations as needed
+    }
+
+    // Initialize display area with example feedback if no existing data (mock data for demonstration)
+    document.addEventListener('DOMContentLoaded', () => {
+        // Kod untuk menonjolkan pautan navigasi yang aktif
+        const navLinks = document.querySelectorAll('.custom-nav-links a');
+        // Mendapatkan nama fail semasa daripada URL
+        const currentPath = window.location.pathname.split('/').pop();
+
+        navLinks.forEach(link => {
+            // Buang kelas 'active' dari semua pautan dahulu
+            link.classList.remove('active');
+
+            // Dapatkan nama fail daripada href pautan
+            const linkPath = link.href.split('/').pop();
+
+            // Bandingkan dengan nama fail halaman semasa
+            if (currentPath === linkPath) {
+                link.classList.add('active'); // Tambah kelas 'active' pada pautan yang sepadan
+            }
+        });
+
+        // Mock feedback data (you would load this from a server in a real app)
+        const mockFeedback = [
+            { name: 'Anonymous', text: "This is a great starting point! I'm excited to see how this system evolves. Perhaps a search bar could be useful?", date: "2024-01-01 10:00:00" },
+            { name: 'Jane Doe', text: "I found the interface very intuitive and easy to use. Keep up the good work!", date: "2024-01-02 11:30:00" }
+        ];
+
+        if (mockFeedback.length > 0) {
+            noFeedbackMessage.style.display = 'none';
+            mockFeedback.reverse().forEach(fb => { // Reverse to show latest first if appending
+                const newFeedbackItem = document.createElement('div');
+                newFeedbackItem.classList.add('feedback-item');
+                newFeedbackItem.innerHTML = `
+                    <strong>${fb.name}</strong>
+                    <p>${fb.text}</p>
+                    <div class="meta">Submitted on ${fb.date}</div>
+                `;
+                feedbackDisplayArea.appendChild(newFeedbackItem);
+            });
+        }
+    });
+
+</script>
+</body>
+</html>

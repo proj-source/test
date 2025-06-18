@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenPulse Urban Park</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+   
+
+ /* General Body & Layout Styles */
+body {
+  font-family: 'Poppins', sans-serif; /* Modern, clean font */
+  background-image:
+    linear-gradient(rgba(240, 253, 240, 0.6), rgba(220, 255, 220, 0.6)), /* Slightly softer overlay */
+    url('photo_2025-06-17_13-36-56.jpg'); /* Your uploaded photo */
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center; /* Center the background image */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  line-height: 1.6; /* Improved readability */
+}
+
+
+    /* Custom Navbar Styles */
+    .custom-navbar {
+      background: linear-gradient(to right, #1a5e2f, #2e7d32); /* Gradient from deep to slightly lighter green */
+      padding: 0.8rem 1.5rem; /* Further reduced padding to make it smaller */
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Slightly softer shadow */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box; /* Include padding in width */
+      z-index: 1000; /* Ensure navbar stays on top */
+    }
+
+    .custom-navbar-brand {
+      color: #e6ffe6; /* Light green */
+      font-family: 'Inter', sans-serif; /* Changed to Inter */
+      font-size: 2.2rem; /* Reduced font size */
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px; /* Reduced gap */
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Subtle text shadow */
+    }
+
+    .custom-navbar-brand .leaf-icon {
+      width: 25px; /* Reduced leaf icon size */
+      height: 25px;
+      fill: #a2e8a2; /* Slightly darker green for the leaf */
+      vertical-align: middle;
+      transition: transform 0.3s ease; /* Smooth transition for icon */
+    }
+
+    .custom-navbar-brand:hover .leaf-icon {
+        transform: rotate(8deg) scale(1.05); /* Slight rotation and scale on hover */
+    }
+
+    .custom-nav-links {
+      display: flex;
+      gap: 20px; /* Reduced gap between links */
+      align-items: center; /* Vertically align items in the nav links */
+    }
+
+    .custom-nav-links a {
+      color: #e6ffe6;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif; /* Changed to Inter */
+      font-size: 1.4rem; /* Reduced font size */
+      padding: 0.4rem 0.8rem; /* Reduced padding */
+      border-radius: 7px; /* Slightly smaller rounded corners */
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    }
+
+    .custom-nav-links a:hover,
+    .custom-nav-links a.active {
+      background-color: rgba(255, 255, 255, 0.2); /* Slightly less pronounced semi-transparent white hover */
+      color: #ffffff;
+      transform: translateY(-1px); /* Subtle lift on hover */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+
+    /* Gamified Button Styles */
+    .gamified-btn {
+      background: linear-gradient(to right, #ff6b6b, #ee2e85); /* Vibrant gradient for gamified button */
+      color: #ffffff !important; /* Ensure text color is white */
+      font-weight: 700;
+      padding: 0.6rem 1.2rem !important; /* Reduced padding */
+      font-size: 1.3rem !important; /* Reduced font size */
+      border-radius: 30px !important; /* Smaller pill shape */
+      box-shadow: 0 5px 12px rgba(255, 107, 107, 0.3); /* Softer glow effect */
+      transition: all 0.3s ease-in-out;
+      display: flex;
+      align-items: center;
+      gap: 7px; /* Reduced gap */
+      text-transform: uppercase;
+      letter-spacing: 0.7px; /* Reduced letter spacing */
+    }
+
+    .gamified-btn:hover {
+      background: linear-gradient(to right, #ee2e85, #ff6b6b); /* Reverse gradient on hover */
+      transform: translateY(-3px) scale(1.02) !important; /* Less pronounced lift and scale */
+      box-shadow: 0 8px 15px rgba(255, 107, 107, 0.4) !important; /* Softer stronger glow */
+    }
+
+    .gamified-btn .game-icon {
+      width: 20px; /* Reduced icon size */
+      height: 20px;
+      fill: #ffffff;
+    }
+
+    /* Main Content Area - Full width blocks */
+    .main-blocks-container {
+      flex-grow: 1; /* Allows container to take available vertical space */
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center blocks horizontally */
+      width: 100%;
+      padding: 40px 0; /* Reduced vertical padding */
+      box-sizing: border-box;
+    }
+
+    /* Individual Interactive Block */
+    .interactive-block {
+      background-color: #2e7d32; /* Green block color */
+      color: #ffffff;
+      margin-bottom: 40px; /* Reduced space between blocks */
+      width: 85%; /* Slightly narrower responsive width */
+      max-width: 900px; /* Reduced max width */
+      border-radius: 20px; /* Slightly less rounded overall block */
+      overflow: hidden; /* Ensures elements respect border-radius */
+      display: flex;
+      flex-direction: column; /* Stack content and location */
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Softer shadow */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for hover effect */
+      border: 1px solid rgba(255,255,255,0.08); /* Slightly less visible white border */
+    }
+
+    .interactive-block:hover {
+        transform: translateY(-8px) scale(1.005); /* Less pronounced lift and scale on hover */
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3); /* Softer enhanced shadow on hover */
+    }
+
+    /* Content Row inside interactive-block */
+    .interactive-content-row {
+      display: flex;
+      flex-grow: 1; /* Allow content to fill available space */
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Common styles for image and text areas */
+    .block-left-content,
+    .block-right-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center content horizontally */
+      justify-content: center; /* Center content vertically */
+      padding: 25px; /* Reduced padding */
+      box-sizing: border-box;
+      flex: 1; /* Equal width for both halves */
+      position: relative;
+      overflow: hidden; /* Ensures image/text fit within rounded corners */
+      min-height: 380px; /* Reduced minimum height for content areas */
+    }
+
+    /* Styling for Block 1 and 3 (Image Left) */
+    .interactive-block.block-1 .block-left-content,
+    .interactive-block.block-3 .block-left-content {
+        /* No background-color here, defaults to parent green */
+        border-top-left-radius: 20px; /* Match parent */
+        border-bottom-left-radius: 20px; /* Match parent */
+        border-top-right-radius: 0; /* Straight edge for separation */
+        border-bottom-right-radius: 0; /* Straight edge for separation */
+    }
+
+    /* Styling for Block 2 (Text Left, Image Right) */
+    .interactive-block.block-2 .block-right-content {
+        /* No background-color here, defaults to parent green */
+        border-top-right-radius: 20px; /* Match parent */
+        border-bottom-right-radius: 20px; /* Match parent */
+        border-top-left-radius: 0; /* Straight edge for separation */
+        border-bottom-left-radius: 0; /* Straight edge for separation */
+    }
+    /* Ensure the other side of the blocks maintains the radius */
+    .interactive-block.block-1 .block-right-content,
+    .interactive-block.block-3 .block-right-content {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+    .interactive-block.block-2 .block-left-content {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+
+    /* Image Styling: Ensures it's contained, centered, and has the new shape */
+    .interactive-content-row img {
+      max-width: 100%; /* Ensure image doesn't overflow */
+      max-height: 320px; /* Reduced max height for images */
+      object-fit: contain; /* Contain the entire image within its bounds */
+      display: block; /* Remove extra space below image */
+      border-radius: 0; /* Removed explicit border-radius here, clip-path handles shape */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Softer shadow on image */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for image hover */
+      /* New Clip-path for aesthetic shape */
+      clip-path: polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%);
+    }
+
+    .interactive-block:hover .interactive-content-row img {
+        transform: scale(1.02); /* Less pronounced zoom on image when block is hovered */
+        box-shadow: 0 6px 18px rgba(0,0,0,0.3); /* Slightly stronger shadow on hover */
+    }
+
+    /* Text content styling */
+    .block-text-content {
+      font-size: 1.15rem; /* Reduced font size */
+      line-height: 1.7; /* Reduced line height */
+      text-align: center;
+      padding: 8px 15px; /* Reduced internal padding for text readability */
+      font-weight: 300; /* Lighter font weight for modern feel */
+      text-shadow: 0 1px 3px rgba(0,0,0,0.15); /* Softer text shadow */
+    }
+
+    .block-location {
+      background-color: rgba(0, 0, 0, 0.18); /* Slightly softer transparent background */
+      padding: 18px 25px; /* Reduced padding */
+      text-align: center;
+      font-family: 'Inter', sans-serif; /* Changed to Inter */
+      font-size: 1.3rem; /* Reduced font size */
+      font-weight: 700; /* Bolder font weight */
+      border-bottom-left-radius: 20px; /* Match block radius */
+      border-bottom-right-radius: 20px; /* Match block radius */
+      letter-spacing: 0.8px; /* Reduced letter spacing */
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    /* Footer Styles */
+    .footer {
+      background-color: #1a5e2f; /* Matches dark green theme */
+      color: #e6ffe6;
+      text-align: center;
+      padding: 2rem 1rem; /* Reduced generous padding */
+      margin-top: auto;
+      width: 100%;
+      box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.3); /* Softer deeper shadow for footer */
+      font-size: 0.95rem; /* Slightly smaller font size */
+    }
+
+    .footer p {
+      margin: 0;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 992px) { /* Tablets and smaller desktops */
+      .custom-navbar {
+        padding: 0.8rem 1.2rem;
+      }
+      .custom-navbar-brand {
+        font-size: 1.8rem; /* Further reduced for tablets */
+      }
+      .custom-navbar-brand .leaf-icon {
+        width: 22px; /* Further reduced for tablets */
+        height: 22px;
+      }
+      .custom-nav-links a {
+        font-size: 1.2rem; /* Further reduced for tablets */
+        padding: 0.3rem 0.7rem; /* Further reduced for tablets */
+      }
+      .gamified-btn {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 1.1rem !important;
+      }
+      .gamified-btn .game-icon {
+        width: 16px;
+        height: 16px;
+      }
+      .interactive-block {
+        width: 90%;
+        margin-bottom: 30px;
+        border-radius: 15px; /* Slightly less rounded for tablets */
+      }
+      .block-left-content,
+      .block-right-content {
+          padding: 18px;
+          min-height: 300px; /* Adjusted min-height for tablets */
+          border-radius: 15px !important; /* Adjust radius for blocks */
+      }
+      .interactive-content-row img {
+          max-height: 250px; /* Adjusted fixed height for consistency on tablets */
+      }
+      .block-text-content {
+        font-size: 1rem;
+      }
+      .block-location {
+        font-size: 1.2rem;
+        padding: 15px 20px;
+        border-bottom-left-radius: 15px; /* Match block radius */
+        border-bottom-right-radius: 15px; /* Match block radius */
+      }
+      /* Ensure other sides of the blocks maintain radius for tablets */
+      .interactive-block.block-1 .block-right-content,
+      .interactive-block.block-3 .block-right-content {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+      }
+      .interactive-block.block-2 .block-left-content {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+      }
+    }
+
+    @media (max-width: 768px) { /* Mobile devices */
+      .custom-navbar {
+        flex-direction: column;
+        padding: 0.8rem;
+      }
+      .custom-navbar-brand {
+        margin-bottom: 0.8rem;
+        font-size: 1.6rem;
+      }
+      .custom-navbar-brand .leaf-icon {
+        width: 22px;
+        height: 22px;
+      }
+      .custom-nav-links {
+        gap: 8px;
+        flex-wrap: wrap; /* Allow navigation links to wrap */
+        justify-content: center;
+      }
+      .custom-nav-links a {
+        padding: 0.5rem 0.6rem;
+        font-size: 1rem;
+      }
+      .gamified-btn {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 1rem !important;
+      }
+      .gamified-btn .game-icon {
+        width: 16px;
+        height: 16px;
+      }
+      .interactive-block {
+        flex-direction: column; /* Stack image and text vertically */
+        margin-bottom: 25px;
+        border-radius: 12px;
+      }
+      .interactive-content-row {
+          flex-direction: column; /* Stack left and right content vertically */
+      }
+      .block-left-content,
+      .block-right-content {
+          width: 100%; /* Full width when stacked */
+          padding: 12px; /* Adjust padding */
+          border-radius: 12px !important; /* Fully rounded corners for stacked items */
+          min-height: 250px; /* Adjusted min-height for stacked blocks */
+      }
+      .interactive-content-row img {
+        max-height: 220px; /* Adjusted consistent height for mobile */
+        clip-path: none; /* Remove clip-path on smaller screens for simplicity */
+        border-radius: 10px; /* Reapply border-radius for mobile */
+      }
+      .block-text-content {
+        font-size: 0.9rem;
+      }
+      .block-location {
+        font-size: 1rem;
+        padding: 12px 18px;
+        border-bottom-left-radius: 12px; /* Match block radius */
+        border-bottom-right-radius: 12px; /* Match block radius */
+      }
+    }
+
+    @media (max-width: 480px) { /* Smaller mobile devices */
+      .custom-navbar-brand {
+        font-size: 1.4rem;
+      }
+      .custom-nav-links a {
+        font-size: 0.9rem;
+      }
+      .interactive-block {
+        margin-bottom: 15px;
+      }
+      .interactive-content-row img {
+        max-height: 180px; /* Adjusted max-height for very small screens */
+      }
+      .block-text-content {
+        font-size: 0.85rem;
+      }
+      .block-location {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="custom-navbar">
+    <a href="#" class="custom-navbar-brand">
+        <svg class="leaf-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.025 0c-4.482 0-8.106 3.624-8.106 8.106 0 2.241 0.908 4.275 2.376 5.768l-8.775 8.775c-0.208 0.208-0.208 0.546 0 0.754s0.546 0.208 0.754 0l8.775-8.775c1.493 1.468 3.527 2.376 5.768 2.376 4.482 0 8.106-3.624 8.106-8.106s-3.624-8.106-8.106-8.106zM17.025 15.212c-3.921 0-7.106-3.185-7.106-7.106s3.185-7.106 7.106-7.106 7.106 3.185 7.106 7.106-3.185 7.106-7.106 7.106z"/>
+        </svg>
+        GreenPulse
+    </a>
+    <div class="custom-nav-links">
+      <a href="index.html" class="active" id="home-nav">Home</a>
+      <a href="about us.html" id="about-us-nav">About Us</a>
+      <a href="InfoGraphic.html" id="view-infographic-nav">Infographic</a>
+      <a href="GoGreen (1).html" id="take-a-survey-nav">Survey</a>
+      <a href="game1.html" class="gamified-btn" id="start-game-btn">
+        <svg class="game-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM11 16H9V14H11V16ZM11 10H9V8H11V10ZM15 10H13V8H15V10ZM15 16H13V14H15V16Z" fill="currentColor"/>
+        </svg>
+        Start Game
+      </a>
+    </div>
+  </nav>
+
+  <div class="main-blocks-container">
+    <!-- Block 1: Image Left, Text Right -->
+    <div class="interactive-block block-1">
+      <div class="interactive-content-row">
+        <div class="block-left-content">
+          <img src="photo_2025-06-16_22-22-15.jpg" alt="Volunteers cleaning a park.">
+        </div>
+        <div class="block-right-content">
+          <div class="block-text-content">
+            A public park with jogging, cycling and fitness facilities in Shah Alam, Selangor. Enjoy the view of the sky, river and pond, and the iconic red bridge at night.
+          </div>
+        </div>
+      </div>
+      <div class="block-location">ELMINA CENTRAL PARK</div>
+    </div>
+
+    <!-- Block 2: Text Left, Image Right -->
+    <div class="interactive-block block-2">
+      <div class="interactive-content-row">
+        <div class="block-left-content">
+          <div class="block-text-content">
+            Taman Rimba Bukit Kerinchi is a popular destination for nature enthusiasts who enjoy hiking, picnicking, and camping.The area boasts several benches and rest areas where visitors can take a break and enjoy the scenic surroundings.
+          </div>
+        </div>
+        <div class="block-right-content">
+          <img src="photo_2025-06-16_23-47-04.jpg" alt="Children learning about plants.">
+        </div>
+      </div>
+      <div class="block-location">BUKIT KERINCHI FOREST PARK</div>
+    </div>
+
+    <!-- Block 3: Image Left, Text Right -->
+    <div class="interactive-block block-3">
+      <div class="interactive-content-row">
+        <div class="block-left-content">
+          <img src="photo_2025-06-16_23-46-57.jpg">
+        </div>
+        <div class="block-right-content">
+          <div class="block-text-content">
+            This trail is great for running and walking, and it's unlikely you'll encounter many other people while exploring. The trail is open year-round and is beautiful to visit anytime.
+          </div>
+        </div>
+      </div>
+      <div class="block-location">TAMAN ALAM IMPIAN</div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 GreenPulse Urban Park. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

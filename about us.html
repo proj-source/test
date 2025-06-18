@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+   /* General Body & Layout Styles */
+body {
+  font-family: 'Poppins', sans-serif; /* Modern, clean font */
+  background-image:
+    linear-gradient(rgba(240, 253, 240, 0.6), rgba(220, 255, 220, 0.6)), /* Slightly softer overlay */
+    url('photo_2025-06-17_13-36-56.jpg'); /* Your uploaded photo */
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center; /* Center the background image */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  line-height: 1.6; /* Improved readability */
+}
+
+
+
+   /* Custom Navbar Styles */
+    .custom-navbar {
+      background: linear-gradient(to right, #1a5e2f, #2e7d32); /* Gradient from deep to slightly lighter green */
+      padding: 0.8rem 1.5rem; /* Further reduced padding to make it smaller */
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Slightly softer shadow */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box; /* Include padding in width */
+      z-index: 1000; /* Ensure navbar stays on top */
+    }
+
+    .custom-navbar-brand {
+      color: #e6ffe6; /* Light green */
+      font-family: 'Inter', sans-serif; /* Changed to Inter */
+      font-size: 2.2rem; /* Reduced font size */
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px; /* Reduced gap */
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Subtle text shadow */
+    }
+
+    .custom-navbar-brand .leaf-icon {
+      width: 25px; /* Reduced leaf icon size */
+      height: 25px;
+      fill: #a2e8a2; /* Slightly darker green for the leaf */
+      vertical-align: middle;
+      transition: transform 0.3s ease; /* Smooth transition for icon */
+    }
+
+    .custom-navbar-brand:hover .leaf-icon {
+        transform: rotate(8deg) scale(1.05); /* Slight rotation and scale on hover */
+    }
+
+    .custom-nav-links {
+      display: flex;
+      gap: 20px; /* Reduced gap between links */
+      align-items: center; /* Vertically align items in the nav links */
+    }
+
+    .custom-nav-links a {
+      color: #e6ffe6;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif; /* Changed to Inter */
+      font-size: 1.4rem; /* Reduced font size */
+      padding: 0.4rem 0.8rem; /* Reduced padding */
+      border-radius: 7px; /* Slightly smaller rounded corners */
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    }
+
+    .custom-nav-links a:hover,
+    .custom-nav-links a.active {
+      background-color: rgba(255, 255, 255, 0.2); /* Slightly less pronounced semi-transparent white hover */
+      color: #ffffff;
+      transform: translateY(-1px); /* Subtle lift on hover */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+
+
+    /* Gamified Button Styles */
+    .gamified-btn {
+      background: #FC4F4F;
+      color: #ffffff !important;
+      font-weight: 700;
+      padding: 0.6rem 1.2rem !important;
+      font-size: 1.3rem !important;
+      border-radius: 30px !important;
+      box-shadow: 0 4px 10px rgba(255, 77, 77, 0.4);
+      transition: all 0.3s ease-in-out;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    .gamified-btn:hover {
+      background-color: #E03C3C;
+      transform: translateY(-3px) scale(1.02) !important;
+      box-shadow: 0 6px 12px rgba(255, 77, 77, 0.5) !important;
+    }
+
+    .gamified-btn .game-icon {
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+    }
+
+    /* Responsive Adjustments for Navbar */
+    @media (max-width: 992px) {
+      .custom-navbar {
+        padding: 0.8rem 1.2rem;
+      }
+      .custom-navbar-brand {
+        font-size: 1.8rem;
+      }
+      .custom-navbar-brand .leaf-icon {
+        width: 22px;
+        height: 22px;
+      }
+      .custom-nav-links a {
+        font-size: 1.2rem;
+        padding: 0.3rem 0.7rem;
+      }
+      .gamified-btn {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 1.1rem !important;
+      }
+      .gamified-btn .game-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .custom-navbar {
+        flex-direction: column;
+        padding: 0.8rem;
+      }
+      .custom-navbar-brand {
+        margin-bottom: 0.8rem;
+        font-size: 1.6rem;
+      }
+      .custom-navbar-brand .leaf-icon {
+        width: 22px;
+        height: 22px;
+      }
+      .custom-nav-links {
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .custom-nav-links a {
+        padding: 0.5rem 0.6rem;
+        font-size: 1rem;
+      }
+      .gamified-btn {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 1rem !important;
+      }
+      .gamified-btn .game-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .custom-navbar-brand {
+        font-size: 1.4rem;
+      }
+      .custom-nav-links a {
+        font-size: 0.9rem;
+      }
+    }
+
+
+
+
+
+
+
+/* About Section Styles (existing text block) */
+    .about-section {
+      background-color: #fdfdfd; /* Very light background for this text block */
+      padding: 2.5rem; /* More padding */
+      border-radius: 18px; /* More rounded */
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12); /* Softer shadow */
+      max-width: 750px; /* Wider text area */
+      text-align: center;
+      margin-bottom: 4rem; /* More space below this section before images */
+      color: #555; /* Slightly softer text color */
+      line-height: 1.8; /* Improved line spacing for readability */
+      font-size: 1.1rem; /* Slightly larger text */
+    }
+
+    .about-section h2 {
+      color: #2e7d32; /* Dark green */
+      margin-bottom: 1.5rem; /* More space below h2 */
+      font-size: 2.2rem; /* Larger h2 */
+      font-weight: 600;
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="custom-navbar">
+    <a href="index.html" class="custom-navbar-brand">
+        <svg class="leaf-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.025 0c-4.482 0-8.106 3.624-8.106 8.106 0 2.241 0.908 4.275 2.376 5.768l-8.775 8.775c-0.208 0.208-0.208 0.546 0 0.754s0.546 0.208 0.754 0l8.775-8.775c1.493 1.468 3.527 2.376 5.768 2.376 4.482 0 8.106-3.624 8.106-8.106s-3.624-8.106-8.106-8.106zM17.025 15.212c-3.921 0-7.106-3.185-7.106-7.106s3.185-7.106 7.106-7.106 7.106 3.185 7.106 7.106-3.185 7.106-7.106 7.106z"/>
+        </svg>
+        GreenPulse
+    </a>
+    <div class="custom-nav-links">
+      <a href="index.html" id="home-nav">Home</a>
+      <a href="about.html" class="active" id="about-us-nav">About Us</a>
+      <a href="InfoGraphic.html" id="view-infographic-nav">Infographic</a>
+      <a href="GoGreen.html" id="take-a-survey-nav">Survey</a>
+      <a href="gamee1.html" class="gamified-btn" id="start-game-btn">
+        <svg class="game-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM11 16H9V14H11V16ZM11 10H9V8H11V10ZM15 10H13V8H15V10ZM15 16H13V14H15V16Z" fill="currentColor"/>
+        </svg>
+        Start Game
+      </a>
+    </div>
+  </nav>
+
+
+<br>
+<br>
+
+
+
+    <div class="bg-white text-gray-800 rounded-xl shadow-lg p-6 mb-8 max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4 text-green-700">About Us</h2>
+      
+      <p class="text-gray-700 leading-relaxed text-lg">
+        The GreenPulse encourages sustainable practices by gathering feedback from park visitors. 
+        We aim to create cleaner, greener public spaces, educational campaigns, 
+        and community collaboration. Your voice matters in building a better environment!
+      </p>
+    </div>
+
+
+
+    <!-- Behavior Section (based on the provided image layout) -->
+    <div class="bg-green-700 text-white rounded-xl shadow-lg p-6 mb-8 flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8 max-w-4xl mx-auto">
+      <div class="w-full md:w-1/3 flex justify-center">
+        <img src="photo_2025-06-17_01-42-58.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x200/90EE90/000000?text=Behavior';" alt="People engaging in responsible behavior in a park" class="rounded-lg shadow-md w-full max-w-xs md:max-w-none">
+      </div>
+      <div class="w-full md:w-2/3 text-center md:text-left">
+        <h2 class="text-3xl font-bold mb-4 text-green-100">Behavior</h2>
+        <p class="text-green-50 leading-relaxed text-lg">
+          Respectful and responsible behavior ensures that parks remain clean, safe, and enjoyable for everyone. Visitors are encouraged to follow park rules, dispose of litter properly, respect wildlife, and share spaces considerately with others. Educational programs, community events, and clear communication of park policies foster a culture of good behavior and environmental stewardship.
+        </p>
+      </div>
+    </div>
+
+   
+
+
+ <!-- safety Section (based on the provided image layout) -->
+    <div class="bg-green-700 text-white rounded-xl shadow-lg p-6 mb-8 flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8 max-w-4xl mx-auto">
+      <div class="w-full md:w-1/3 flex justify-center">
+        <img src="photo_2025-06-17_01-42-47.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x200/90EE90/000000?text=Behavior';" alt="People engaging in responsible behavior in a park" class="rounded-lg shadow-md w-full max-w-xs md:max-w-none">
+      </div>
+      <div class="w-full md:w-2/3 text-center md:text-left">
+        <h2 class="text-3xl font-bold mb-4 text-green-100">Safety</h2>
+        <p class="text-green-50 leading-relaxed text-lg">
+          Safety is a top priority in urban parks. Well-maintained pathways, adequate lighting, clear signage, and regular security patrols help minimize accidents and deter criminal activity. Emergency response systems and accessible facilities also ensure that visitors feel secure while enjoying recreational activities.    </p>
+      </div>
+    </div>
+
+
+
+
+<!-- Wellness Section (based on the provided image layout) -->
+    <div class="bg-green-700 text-white rounded-xl shadow-lg p-6 mb-8 flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8 max-w-4xl mx-auto">
+      <div class="w-full md:w-1/3 flex justify-center">
+        <img src="photo_2025-06-17_01-42-14.jpg" onerror="this.onerror=null;this.src='https://placehold.co/300x200/90EE90/000000?text=Behavior';" alt="People engaging in responsible behavior in a park" class="rounded-lg shadow-md w-full max-w-xs md:max-w-none">
+      </div>
+      <div class="w-full md:w-2/3 text-center md:text-left">
+        <h2 class="text-3xl font-bold mb-4 text-green-100">Wellness</h2>
+        <p class="text-green-50 leading-relaxed text-lg">
+         Urban parks promote overall wellness by providing spaces for exercise, relaxation, and social interaction. Walking trails, fitness equipment, playgrounds, and open fields encourage physical activity for people of all ages. The natural environment, fresh air, and greenery also support mental health by reducing stress and promoting mindfulness.   </p>
+      </div>
+    </div>
+
+
+
+  </main>
+
+  <footer class="bg-green-800 text-white text-center p-6 mt-auto">
+    <p>&copy; 2025 GreenPulse Urban Park. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

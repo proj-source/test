@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Go Green Infographic</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+
+/* General Body & Layout Styles */
+body {
+  font-family: 'Poppins', sans-serif; /* Modern, clean font */
+  background-image:
+    linear-gradient(rgba(240, 253, 240, 0.6), rgba(220, 255, 220, 0.6)), /* Slightly softer overlay */
+    url('photo_2025-06-17_13-36-56.jpg'); /* Your uploaded photo */
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center; /* Center the background image */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  line-height: 1.6; /* Improved readability */
+}
+
+
+    /* Custom Navbar Styles */
+    .custom-navbar {
+      background: linear-gradient(to right, #1a5e2f, #2e7d32); /* Gradient from deep to slightly lighter green */
+      padding: 0.8rem 1.5rem; /* Further reduced padding to make it smaller */
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Slightly softer shadow */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box; /* Include padding in width */
+      z-index: 1000; /* Ensure navbar stays on top */
+    }
+
+    .custom-navbar-brand {
+      color: #e6ffe6; /* Light green */
+      font-family: 'Inter', sans-serif; /* Changed to Inter */
+      font-size: 2.2rem; /* Reduced font size */
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px; /* Reduced gap */
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Subtle text shadow */
+    }
+
+    .custom-navbar-brand .leaf-icon {
+      width: 25px; /* Reduced leaf icon size */
+      height: 25px;
+      fill: #a2e8a2; /* Slightly darker green for the leaf */
+      vertical-align: middle;
+      transition: transform 0.3s ease; /* Smooth transition for icon */
+    }
+
+    .custom-navbar-brand:hover .leaf-icon {
+        transform: rotate(8deg) scale(1.05); /* Slight rotation and scale on hover */
+    }
+
+    .custom-nav-links {
+      display: flex;
+      gap: 20px; /* Reduced gap between links */
+      align-items: center; /* Vertically align items in the nav links */
+    }
+
+    .custom-nav-links a {
+      color: #e6ffe6;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif; /* Changed to Inter */
+      font-size: 1.4rem; /* Reduced font size */
+      padding: 0.4rem 0.8rem; /* Reduced padding */
+      border-radius: 7px; /* Slightly smaller rounded corners */
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    }
+
+    .custom-nav-links a:hover,
+    .custom-nav-links a.active {
+      background-color: rgba(255, 255, 255, 0.2); /* Slightly less pronounced semi-transparent white hover */
+      color: #ffffff;
+      transform: translateY(-1px); /* Subtle lift on hover */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+
+
+
+    /* Gamified Button Styles (Copied from greenpulse-redesign) */
+    .gamified-btn {
+      background: #FC4F4F; /* Solid red-pink color to match image */
+      color: #ffffff !important; /* Ensure text color is white */
+      font-weight: 700;
+      padding: 0.6rem 1.2rem !important; /* Reduced padding */
+      font-size: 1.3rem !important; /* Reduced font size */
+      border-radius: 30px !important; /* Smaller pill shape */
+      box-shadow: 0 4px 10px rgba(255, 77, 77, 0.4); /* Softer glow effect */
+      transition: all 0.3s ease-in-out;
+      display: flex;
+      align-items: center;
+      gap: 7px; /* Reduced gap */
+      text-transform: uppercase;
+      letter-spacing: 0.7px; /* Reduced letter spacing */
+    }
+
+    .gamified-btn:hover {
+      background-color: #E03C3C; /* Slightly darker red-pink on hover */
+      transform: translateY(-3px) scale(1.02) !important; /* Less pronounced lift and scale */
+      box-shadow: 0 6px 12px rgba(255, 77, 77, 0.5) !important; /* Stronger glow on hover */
+    }
+
+    .gamified-btn .game-icon {
+      width: 20px; /* Reduced icon size */
+      height: 20px;
+      fill: #ffffff;
+    }
+
+    /* Responsive Adjustments for Navbar (Copied from greenpulse-redesign) */
+    @media (max-width: 992px) { /* Tablets and smaller desktops */
+      .custom-navbar {
+        padding: 0.8rem 1.2rem;
+      }
+      .custom-navbar-brand {
+        font-size: 1.8rem; /* Further reduced for tablets */
+      }
+      .custom-navbar-brand .leaf-icon {
+        width: 22px; /* Further reduced for tablets */
+        height: 22px;
+      }
+      .custom-nav-links a {
+        font-size: 1.2rem; /* Further reduced for tablets */
+        padding: 0.3rem 0.7rem; /* Further reduced for tablets */
+      }
+      .gamified-btn {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 1.1rem !important;
+      }
+      .gamified-btn .game-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    @media (max-width: 768px) { /* Mobile devices */
+      .custom-navbar {
+        flex-direction: column;
+        padding: 0.8rem;
+      }
+      .custom-navbar-brand {
+        margin-bottom: 0.8rem;
+        font-size: 1.6rem;
+      }
+      .custom-navbar-brand .leaf-icon {
+        width: 22px;
+        height: 22px;
+      }
+      .custom-nav-links {
+        gap: 8px;
+        flex-wrap: wrap; /* Allow navigation links to wrap */
+        justify-content: center;
+      }
+      .custom-nav-links a {
+        padding: 0.5rem 0.6rem;
+        font-size: 1rem;
+      }
+      .gamified-btn {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 1rem !important;
+      }
+      .gamified-btn .game-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    @media (max-width: 480px) { /* Smaller mobile devices */
+      .custom-navbar-brand {
+        font-size: 1.4rem;
+      }
+      .custom-nav-links a {
+        font-size: 0.9rem;
+      }
+    }
+
+
+    /* Progress bar (preserved from InfoGraphic.html) */
+    #progressBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      background-color: #66bb6a; /* Green progress fill */
+      width: 0%; /* Initial width */
+      z-index: 9999;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Progress text above the bar (preserved from InfoGraphic.html) */
+    .progress-text {
+        position: fixed;
+        top: 8px; /* Adjust based on your header/progress bar height */
+        right: 20px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: #1b5e20;
+        z-index: 10000;
+    }
+
+    /* Main heading (preserved from InfoGraphic.html) */
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #1b5e20; /* Even darker green for main title */
+      font-size: 2.5rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    }
+
+    /* Container for the infographic content (preserved from InfoGraphic.html) */
+    .infographic-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.15); /* More prominent shadow */
+    }
+
+    /* General detailed info block styling (preserved from InfoGraphic.html) */
+    .detailed-info {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f0f9f4; /* Lighter green background */
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        margin-top: 30px; /* Space between blocks */
+        position: relative; /* For fun fact button positioning */
+    }
+
+    .detailed-info h3 {
+      color: #1b5e20; /* Dark green for section headings */
+      margin-bottom: 0.5rem;
+      font-size: 1.8rem;
+    }
+
+    .detailed-info p {
+      color: #4e4e4e; /* Darker gray for body text */
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    /* Details tag styling for collapsibles (preserved from InfoGraphic.html) */
+    details {
+        margin-top: 1em;
+        background-color: #e8f5e9; /* Light green background for details */
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        border: 1px solid #d4edda;
+        transition: all 0.3s ease;
+    }
+    details[open] {
+        background-color: #d4edda; /* Slightly darker when open */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    details summary {
+        cursor: pointer;
+        font-weight: bold;
+        color: #2e7d32;
+        padding: 0.5rem 0;
+        outline: none; /* Remove outline on click */
+        user-select: none; /* Prevent text selection on summary */
+    }
+    details summary:hover {
+        color: #1b5e20; /* Darker green on hover */
+    }
+    details ul {
+        margin-top: 10px;
+        list-style: disc; /* Use disc for list items */
+        padding-left: 25px; /* Indent list items */
+        color: #555;
+    }
+    details ul li {
+        margin-bottom: 0.5em;
+    }
+
+    /* Fun Fact Button Styling (preserved from InfoGraphic.html) */
+    .fun-fact-button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #FFD700; /* Gold color for sparkle */
+      transition: transform 0.2s ease;
+      position: absolute; /* Position relative to parent detailed-info */
+      right: 20px;
+      top: 20px;
+      padding: 5px; /* Make click area larger */
+      border-radius: 50%; /* Circular button */
+      line-height: 1; /* Align emoji */
+    }
+    .fun-fact-button:hover {
+      transform: scale(1.2) rotate(10deg);
+    }
+
+
+    /* Quiz Section Styling (preserved from InfoGraphic.html) */
+    .quiz {
+      margin-top: 40px;
+      background: #fff0f5; /* Light pink/purple background */
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .quiz h3 {
+      font-size: 24px;
+      color: #b0006d; /* Dark pink/purple heading */
+      margin-bottom: 1rem;
+    }
+
+    .quiz p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz .question {
+      margin-bottom: 1.5rem;
+      padding: 10px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .quiz .question p {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.8rem;
+    }
+
+    .quiz label {
+      display: block;
+      margin-bottom: 0.3rem;
+      cursor: pointer;
+      user-select: none;
+      color: #555;
+    }
+
+    .quiz input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    .quiz button[type="submit"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #ff69b4; /* Pink submit button */
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .quiz button[type="submit"]:hover {
+      background-color: #e04a9d;
+      transform: translateY(-1px);
+    }
+
+    .quiz #quiz-result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #b0006d; /* Dark pink/purple for result */
+    }
+
+    .quiz button[type="button"] { /* Retry button */
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: #6a5acd; /* Purple retry button */
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .quiz button[type="button"]:hover {
+      background-color: #5242a0;
+      transform: translateY(-1px);
+    }
+
+    /* Pledge Button Styling (preserved from InfoGraphic.html) */
+    .pledge-btn {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .pledge-btn button {
+      background-color: #43a047; /* Green pledge button */
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .pledge-btn button:hover {
+      background-color: #2e7d32;
+      transform: translateY(-2px);
+    }
+
+    /* Back Button Styling (preserved from InfoGraphic.html) */
+    .back-btn {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .back-btn a {
+      text-decoration: none;
+      background-color: #66bb6a;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .back-btn a:hover {
+      background-color: #388e3c;
+    }
+
+    /* Custom Modal Styling (re-used from previous Canvas for consistency) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000; /* Higher than other elements */
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .modal-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      position: relative;
+    }
+    .modal-overlay.visible .modal-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .modal-content h3 {
+      color: #2e7d32;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .modal-content p {
+      color: #555;
+      margin-bottom: 1.5rem;
+      white-space: pre-wrap;
+      text-align: left;
+      font-size: 1.1rem;
+    }
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .modal-buttons button {
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+    .modal-buttons button.primary {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .modal-buttons button.primary:hover {
+      background-color: #388e3c;
+      transform: translateY(-1px);
+    }
+    .modal-buttons button.secondary {
+      background-color: #e0e0e0;
+      color: #333;
+    }
+    .modal-buttons button.secondary:hover {
+      background-color: #bdbdbd;
+      transform: translateY(-1px);
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.8rem;
+      color: #aaa;
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+      padding: 0;
+      transition: color 0.2s ease;
+    }
+    .modal-close-btn:hover {
+      color: #666;
+    }
+
+    /* Chatbot Styling */
+    .chatbot-container {
+        margin-top: 40px;
+        background: #e3f2fd; /* Light blue background for chatbot */
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        font-family: 'Segoe UI', sans-serif;
+        display: flex;
+        flex-direction: column;
+        height: 500px; /* Fixed height for chat area */
+        overflow: hidden; /* Hide overflow from chat messages */
+        position: relative; /* For scroll to bottom */
+    }
+    .chatbot-container h3 {
+        color: #1976d2; /* Blue heading */
+        margin-bottom: 1rem;
+        font-size: 24px;
+    }
+    .chat-display {
+        flex-grow: 1;
+        background-color: #ffffff;
+        border: 1px solid #bbdefb; /* Light blue border */
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        overflow-y: auto; /* Scroll for chat messages */
+        display: flex;
+        flex-direction: column;
+    }
+    .chat-message {
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        border-radius: 15px;
+        max-width: 80%;
+        word-wrap: break-word;
+    }
+    .chat-message.user {
+        background-color: #e1ffc7; /* Light green for user messages */
+        align-self: flex-end;
+        color: #333;
+    }
+    .chat-message.bot {
+        background-color: #cfe8fc; /* Light blue for bot messages */
+        align-self: flex-start;
+        color: #333;
+    }
+    .chat-input-area {
+        display: flex;
+        gap: 10px;
+    }
+    .chat-input-area input {
+        flex-grow: 1;
+        padding: 10px 15px;
+        border: 1px solid #90caf9; /* Medium blue border */
+        border-radius: 20px;
+        font-size: 1rem;
+    }
+    .chat-input-area button {
+        background-color: #2196f3; /* Blue send button */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+    .chat-input-area button:hover {
+        background-color: #1976d2;
+        transform: translateY(-1px);
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav class="custom-navbar">
+    <a href="#" class="custom-navbar-brand">
+        <svg class="leaf-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.025 0c-4.482 0-8.106 3.624-8.106 8.106 0 2.241 0.908 4.275 2.376 5.768l-8.775 8.775c-0.208 0.208-0.208 0.546 0 0.754s0.546 0.208 0.754 0l8.775-8.775c1.493 1.468 3.527 2.376 5.768 2.376 4.482 0 8.106-3.624 8.106-8.106s-3.624-8.106-8.106-8.106zM17.025 15.212c-3.921 0-7.106-3.185-7.106-7.106s3.185-7.106 7.106-7.106 7.106 3.185 7.106 7.106-3.185 7.106-7.106 7.106z"/>
+        </svg>
+        GreenPulse
+    </a>
+    <div class="custom-nav-links">
+      <a href="index.html" id="home-nav">Home</a>
+      <a href="about us.html" id="about-us-nav">About Us</a>
+      <a href="InfoGraphic.html" class="active" id="view-infographic-nav">Infographic</a>
+      <a href="GoGreen (1).html" id="take-a-survey-nav">Survey</a>
+      <a href="gamee1.html" class="gamified-btn" id="start-game-btn">
+        <svg class="game-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM11 16H9V14H11V16ZM11 10H9V8H11V10ZM15 10H13V8H15V10ZM15 16H13V14H15V16Z" fill="currentColor"/>
+        </svg>
+        Start Game
+      </a>
+    </div>
+  </nav>
+
+  <div id="progressBar"></div>
+  <div class="progress-text" id="scrollProgressText">Progress: 0%</div>
+
+  <h1>📊 Environmental Awareness </h1>
+
+  <div class="infographic-container">
+    <img src="infograph.jpg"
+     width="400"
+     height="300"
+     alt="Infographic"
+     style="display: block; margin: 0 auto;" />
+    <div class="detailed-info">
+
+      <h3>🌿 Elmina Central Park: A Green Haven in Shah Alam
+        <button class="fun-fact-button" onclick="showParkFunFact('elmina')">✨</button>
+      </h3>
+      <p><strong>📍 Location:</strong> <span style="color:#2b7a78;">Elmina, Shah Alam, Selangor</span>. Size: ~<strong>300 acres</strong>. Part of the massive <strong>6,500-acre City of Elmina</strong> township.</p>
+      <p><strong>🌱 Overview:</strong> A wellness-focused park developed by <strong>Sime Darby Property</strong>, blending health, nature, and sustainability into a vibrant outdoor sanctuary.</p>
+
+      <details>
+        <summary>✨ Click to explore Key Features & Attractions</summary>
+        <ul>
+          <li>🌉 <strong>Iconic Bridge:</strong> Snap a photo on the famous <span style="color:red;">bright red bridge</span> – a hit on social media!</li>
+          <li>🌈 <strong>Rainbow Walkway:</strong> Walk through a splash of colors and make your day more cheerful.</li>
+          <li>🚴 <strong>Jogging & Cycling Tracks:</strong> 90km of scenic paths – fitness goals, anyone?</li>
+          <li>🧒 <strong>Inclusive Playground:</strong> Fun for every child, developed in partnership with UNICEF.</li>
+          <li>🌳 <strong>Themed Community Parks:</strong> Explore Forest Park, Urban Park, and more!</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>🌳 Nature & Sustainability</summary>
+        <ul>
+          <li>🌱 <strong>Rainforest Knowledge Centre:</strong> Learn all about native flora and reforestation efforts.</li>
+          <li>🌿 <strong>100+ native species planted</strong>, including endangered and rare trees.</li>
+          <li>🌊 Smart flood zone design that handles <strong>1,000-year floods</strong> – nature meets science!</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>🏞️ Facilities & Tips</summary>
+        <ul>
+          <li>🚻 Clean restrooms and plenty of shady spots for a break.</li>
+          <li>🚗 Parking is limited – come early on weekends!</li>
+          <li>📸 Tons of Insta-worthy corners and calm rest stops.</li>
+          <li>🕖 Visit early morning or around sunset for the best experience!</li>
+          <li>🎟️ Entry is totally FREE – just bring yourself (and water!)</li>
+          <li>🐶 Pets? Some areas allow them – check signs before you go.</li>
+        </ul>
+      </details>
+    </div>
+
+    <div class="quiz">
+      <h3>🎉 Elmina Central Park Fun Quiz!</h3>
+      <p>Test your knowledge and see how much you know about this amazing green space 🌿</p>
+      <form id="elminaQuiz">
+        <div class="question" data-answer="c">
+          <p><strong>1. Elmina Central Park is located in which Malaysian city?</strong></p>
+          <label><input type="radio" name="q1" value="a"> a) Petaling Jaya</label><br>
+          <label><input type="radio" name="q1" value="b"> b) Kuala Lumpur</label><br>
+          <label><input type="radio" name="q1" value="c"> c) Shah Alam</label><br>
+          <label><input type="radio" name="q1" value="d"> d) Kajang</label>
+        </div>
+
+        <div class="question" data-answer="c">
+          <p><strong>2. How large is Elmina Central Park?</strong></p>
+          <label><input type="radio" name="q2" value="a"> a) 100 acres</label><br>
+          <label><input type="radio" name="q2" value="b"> b) 150 acres</label><br>
+          <label><input type="radio" name="q2" value="c"> c) 300 acres</label><br>
+          <label><input type="radio" name="q2" value="d"> d) 500 acres</label>
+        </div>
+
+        <div class="question" data-answer="c">
+          <p><strong>3. Which developer built Elmina Central Park?</strong></p>
+          <label><input type="radio" name="q3" value="a"> a) EcoWorld</label><br>
+          <label><input type="radio" name="q3" value="b"> b) Sunway</label><br>
+          <label><input type="radio" name="q3" value="c"> c) Sime Darby Property</label><br>
+          <label><input type="radio" name="q3" value="d"> d) Mah Sing</label>
+        </div>
+
+        <div class="question" data-answer="c">
+          <p><strong>4. What is the theme of the City of Elmina development?</strong></p>
+          <label><input type="radio" name="q4" value="a"> a) Eco-tourism</label><br>
+          <label><input type="radio" name="q4" value="b"> b) Tech city</label><br>
+          <label><input type="radio" name="q4" value="c"> c) Wellness-oriented</label><br>
+          <label><input type="radio" name="q4" value="d"> d) Industrial</label>
+        </div>
+
+        <div class="question" data-answer="d">
+          <p><strong>5. What color is the famous Elmina Iconic Bridge?</strong></p>
+          <label><input type="radio" name="q5" value="a"> a) Blue</label><br>
+          <label><input type="radio" name="q5" value="b"> b) Yellow</label><br>
+          <label><input type="radio" name="q5" value="c"> c) Orange</label><br>
+          <label><input type="radio" name="q5" value="d"> d) Red</label>
+        </div>
+
+        <div class="question" data-answer="c">
+          <p><strong>6. What is the Elmina Rainforest Knowledge Centre known for?</strong></p>
+          <label><input type="radio" name="q6" value="a"> a) Animal sanctuary</label><br>
+          <label><input type="radio" name="q6" value="b"> b) Camping zone</label><br>
+          <label><input type="radio" name="q6" value="c"> c) Environmental education</label><br>
+          <label><input type="radio" name="q6" value="d"> d) Museum</label>
+        </div>
+
+        <div class="question" data-answer="d">
+          <p><strong>7. How many km of tracks are available across the township?</strong></p>
+          <label><input type="radio" name="q7" value="a"> a) 10km</label><br>
+          <label><input type="radio" name="q7" value="b"> b) 30km</label><br>
+          <label><input type="radio" name="q7" value="c"> c) 60km</label><br>
+          <label><input type="radio" name="q7" value="d"> d) 90km</label>
+        </div>
+
+        <div class="question" data-answer="c">
+          <p><strong>8. What planning concept does Elmina adopt?</strong></p>
+          <label><input type="radio" name="q8" value="a"> a) Smart City</label><br>
+          <label><input type="radio" name="q8" value="b"> b) Transit-Oriented Development</label><br>
+          <label><input type="radio" name="q8" value="c"> c) 15-Minute City</label><br>
+          <label><input type="radio" name="q8" value="d"> d) EcoVillage</label>
+        </div>
+
+        <br>
+        <button type="submit">🚀 Submit Quiz</button>
+        <p id="elmina-result"></p>
+        <button type="button" onclick="resetQuiz('elminaQuiz', 'elmina-result')" id="elminaRetryBtn" style="display:none;">🔄 Try Again</button>
+      </form>
+    </div>
+
+
+
+    <div class="detailed-info">
+ 
+
+      <h3>🌳 Bukit Kerinchi Forest Park: Your Urban Jungle Escape
+        <button class="fun-fact-button" onclick="showParkFunFact('bukitKerinchi')">✨</button>
+      </h3>
+      <p><strong>📍 Location:</strong> <span style="color:#2b7a78;">Bukit Kerinchi, 59200 Kuala Lumpur</span>. Size: ~<strong>66.15 hectares</strong> (part of a larger 252-acre forest including Bukit Gasing).</p>
+      <p><strong>🌱 Overview:</strong> A significant green lung in Kuala Lumpur, offering a natural escape and often considered the KL gateway to Bukit Gasing. Gazetted in 2012 by the Minister of Federal Territories.</p>
+
+      <details>
+        <summary>✨ Click to explore Key Features & Attractions</summary>
+        <ul>
+          <li>⛰️ <strong>Hiking Trails:</strong> Well-maintained paths for all levels, including the famous "Stairway to Heaven" for a challenge.</li>
+          <li>🌉 <strong>Suspension Bridge:</strong> A popular attraction, accessible from Bukit Kerinchi.</li>
+          <li>🐒 <strong>Wildlife Sightings:</strong> Home to monkeys, various bird species (46 surveyed in 2013), amphibians, reptiles, and small mammals.</li>
+          <li>🌿 <strong>Lush Secondary Rainforest:</strong> Featuring towering trees, exotic flowers, and ferns.</li>
+          <li>🏡 <strong>New Urban Park:</strong> Part of Pantai Sentral Park, connecting urban living with nature, featuring a "Ribbon of Life" pathway.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>🌳 Nature & Sustainability</summary>
+        <ul>
+          <li>💧 Serves as a crucial water catchment area.</li>
+          <li>🌱 Ongoing **rewilding efforts** by DBKL to plant indigenous trees and restore local flora and fauna.</li>
+          <li>🦋 Biodiversity-friendly landscaping in new developments, including pollinator gardens.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>🏞️ Facilities & Tips</summary>
+        <ul>
+          <li>🚻 Public toilets available (may require small fee).</li>
+          <li>🏕️ Designated camping area (with pre-arranged permits).</li>
+          <li>🚗 Limited designated parking; roadside parking is common.</li>
+          <li>🕖 Best to visit early to avoid crowds, especially on weekends. Weekdays offer more serenity.</li>
+          <li>🎟️ Entry is FREE.</li>
+          <li>⚠️ Be cautious of monkeys and check weather forecasts (trails can be muddy after rain).</li>
+          <li>👟 Bring water, snacks, insect repellent, and comfortable hiking shoes.</li>
+        </ul>
+      </details>
+    </div>
+
+    <div class="quiz">
+      <h3>🎉 Bukit Kerinchi Forest Park Fun Quiz!</h3>
+      <p>Test your knowledge about this urban green escape 🌿</p>
+      <form id="bukitKerinchiQuiz">
+        <div class="question" data-answer="b">
+          <p><strong>1. What is another common name for Bukit Kerinchi Forest Park?</strong></p>
+          <label><input type="radio" name="q1" value="a"> a) Taman Rimba Kiara</label><br>
+          <label><input type="radio" name="q1" value="b"> b) Taman Rimba Bukit Kerinchi</label><br>
+          <label><input type="radio" name="q1" value="c"> c) Taman Botani Perdana</label><br>
+          <label><input type="radio" name="q1" value="d"> d) Taman Tasik Perdana</label>
+        </div>
+
+        <div class="question" data-answer="c">
+          <p><strong>2. In which city is Bukit Kerinchi Forest Park located?</strong></p>
+          <label><input type="radio" name="q2" value="a"> a) Petaling Jaya</label><br>
+          <label><input type="radio" name="q2" value="b"> b) Shah Alam</label><br>
+          <label><input type="radio" name="q2" value="c"> c) Kuala Lumpur</label><br>
+          <label><input type="radio" name="q2" value="d"> d) Kajang</label>
+        </div>
+
+        <div class="question" data-answer="b">
+          <p><strong>3. Approximately how large is Bukit Kerinchi Forest Park?</strong></p>
+          <label><input type="radio" name="q3" value="a"> a) 25 hectares</label><br>
+          <label><input type="radio" name="q3" value="b"> b) 66.15 hectares</label><br>
+          <label><input type="radio" name="q3" value="c"> c) 120 hectares</label><br>
+          <label><input type="radio" name="q3" value="d"> d) 252 hectares</label>
+        </div>
+
+        <div class="question" data-answer="c">
+          <p><strong>4. When was Bukit Kerinchi Forest Park officially gazetted?</strong></p>
+          <label><input type="radio" name="q4" value="a"> a) July 2002</label><br>
+          <label><input type="radio" name="q4" value="b"> b) July 2007</label><br>
+          <label><input type="radio" name="q4" value="c"> c) July 2012</label><br>
+          <label><input type="radio" name="q4" value="d"> d) July 2017</label>
+        </div>
+
+        <div class="question" data-answer="b">
+          <p><strong>5. What is one primary purpose of the park, beyond recreation, as mentioned in the overview?</strong></p>
+          <label><input type="radio" name="q5" value="a"> a) Commercial development</label><br>
+          <label><input type="radio" name="q5" value="b"> b) Water catchment area</label><br>
+          <label><input type="radio" name="q5" value="c"> c) Agricultural research</label><br>
+          <label><input type="radio" name="q5" value="d"> d) Residential housing</label>
+        </div>
+
+        <div class="question" data-answer="c">
+          <p><strong>6. Which other popular forest reserve is seamlessly connected to Bukit Kerinchi Forest Park?</strong></p>
+          <label><input type="radio" name="q6" value="a"> a) Forest Research Institute Malaysia (FRIM)</label><br>
+          <label><input type="radio" name="q6" value="b"> b) Ayer Hitam Forest Reserve</label><br>
+          <label><input type="radio" name="q6" value="c"> c) Bukit Gasing Forest Reserve</label><br>
+          <label><input type="radio" name="q6" value="d"> d) Kota Damansara Community Forest</label>
+        </div>
+
+        <div class="question" data-answer="b">
+          <p><strong>7. What is the name of the famous steep staircase section within the park, often referred to as a challenging workout?</strong></p>
+          <label><input type="radio" name="q7" value="a"> a) Ladder to Olympus</label><br>
+          <label><input type="radio" name="q7" value="b"> b) Stairway to Heaven / Killer Stairs</label><br>
+          <label><input type="radio" name="q7" value="c"> c) Giant's Causeway</label><br>
+          <label><input type="radio" name="q7" value="d"> d) Rocky Steps</label>
+        </div>
+
+        <div class="question" data-answer="c">
+          <p><strong>8. Besides hiking, what other popular feature, often associated with the Bukit Gasing side, is mentioned as being accessible from Bukit Kerinchi?</strong></p>
+          <label><input type="radio" name="q8" value="a"> a) Zipline</label><br>
+          <label><input type="radio" name="q8" value="b"> b) Waterfall</label><br>
+          <label><input type="radio" name="q8" value="c"> c) Suspension Bridge</label><br>
+          <label><input type="radio" name="q8" value="d"> d) Hot Spring</label>
+        </div>
+
+        <br>
+        <button type="submit">🚀 Submit Quiz</button>
+        <p id="bukitKerinchi-result"></p>
+        <button type="button" onclick="resetQuiz('bukitKerinchiQuiz', 'bukitKerinchi-result')" id="bukitKerinchiRetryBtn" style="display:none;">🔄 Try Again</button>
+      </form>
+    </div>
+
+   
+
+ <div class="detailed-info">
+
+      <h3>🏡 Taman Alam Impian: The City of Arts
+        <button class="fun-fact-button" onclick="showParkFunFact('tamanAlamImpian')">✨</button>
+      </h3>
+      <p><strong>📍 Location:</strong> <span style="color:#2b7a78;">Seksyen 35, 40470 Shah Alam, Selangor</span>. Strategically located ~8km from Shah Alam city center.</p>
+      <p><strong>🌱 Overview:</strong> A unique <strong>1,235-acre freehold township</strong>, initially by **Naza TTDI Sdn Bhd** and now under **S P Setia Berhad**, built on the concept of "Where Nature Embraces Art."</p>
+
+      <details>
+        <summary>✨ Click to explore Key Features & Attractions</summary>
+        <ul>
+          <li>🌳 <strong>LakePoint Park (31 acres):</strong> The central "Green Lung" featuring a musical fountain on weekends.</li>
+          <li>🎨 <strong>Art-Inspired Living:</strong> Integrated art pieces, graffiti walls, street art, and an art gallery throughout the township.</li>
+          <li>🚶‍♀️ <strong>Linear Parks & Green Spaces:</strong> Every housing precinct has its own recreational area and linear parks.</li>
+          <li>🏊 <strong>LakePoint Club:</strong> Exclusive residents' clubhouse with an Olympic-size pool, lake-view gym, and various courts.</li>
+          <li>🛍️ <strong>Town Centre & Retail:</strong> Impian Prisma retail center provides F&B, grocers, and amenities.</li>
+          <li>🎭 <strong>Themed Precincts:</strong> Residential phases often named after art genres (e.g., Fine Arts, Performing Arts).</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>🌳 Nature & Sustainability</summary>
+        <ul>
+          <li>🌱 Over 2,000 trees planted, contributing to a lush environment.</li>
+          <li>💧 Water features and green infrastructure support sustainable living.</li>
+          <li>🌿 Wide nature strips and green buffer zones throughout the township.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>🏞️ Facilities & Tips</summary>
+        <ul>
+          <li>🕒 Public parks are generally open daily; clubhouse access for members.</li>
+          <li>🎟️ Entry to public parks is FREE.</li>
+          <li>🚗 Ample parking in residential and commercial zones.</li>
+          <li>🛣️ Easily accessible via major highways: LKSA, KESAS, Federal Highway, and ELITE. West Coast Highway to boost future connectivity.</li>
+          <li>🚌 Limited direct public transport, but nearby KTM stations are accessible by car.</li>
+          <li>🔐 Gated and guarded precincts with low-density living.</li>
+          <li>🏥 Close proximity to schools, medical centers, and shopping malls.</li>
+        </ul>
+      </details>
+    </div>
+
+    <div class="quiz">
+      <h3>🎉 Taman Alam Impian Fun Quiz!</h3>
+      <p>Test your knowledge about this arts-integrated township 🌿</p>
+      <form id="tamanAlamImpianQuiz">
+        <div class="question" data-answer="c">
+          <p><strong>1. In which Section of Shah Alam is Taman Alam Impian primarily located?</strong></p>
+          <label><input type="radio" name="q1" value="a"> a) Section 7</label><br>
+          <label><input type="radio" name="q1" value="b"> b) Section 13</label><br>
+          <label><input type="radio" name="q1" value="c"> c) Section 35</label><br>
+          <label><input type="radio" name="q1" value="d"> d) Section 20</label>
+        </div>
+
+        <div class="question" data-answer="c">
+          <p><strong>2. What is the approximate total acreage of the township?</strong></p>
+          <label><input type="radio" name="q2" value="a"> a) 31 acres</label><br>
+          <label><input type="radio" name="q2" value="b"> b) 300 acres</label><br>
+          <label><input type="radio" name="q2" value="c"> c) 1,235 acres</label><br>
+          <label><input type="radio" name="q2" value="d"> d) 6,500 acres</label>
+        </div>
+
+        <div class="question" data-answer="c">
+          <p><strong>3. Which developer is currently enhancing Taman Alam Impian?</strong></p>
+          <label><input type="radio" name="q3" value="a"> a) Sime Darby Property</label><br>
+          <label><input type="radio" name="q3" value="b"> b) Naza TTDI Sdn Bhd</label><br>
+          <label><input type="radio" name="q3" value="c"> c) S P Setia Berhad</label><br>
+          <label><input type="radio" name="q3" value="d"> d) EcoWorld</label>
+        </div>
+
+        <div class="question" data-answer="c">
+          <p><strong>4. What is the main concept or tagline for Taman Alam Impian?</strong></p>
+          <label><input type="radio" name="q4" value="a"> a) The City of Lights</label><br>
+          <label><input type="radio" name="q4" value="b"> b) The City of Gardens</label><br>
+          <label><input type="radio" name="q4" value="c"> c) The City of Arts</label><br>
+          <label><input type="radio" name="q4" value="d"> d) The City of Wellness</label>
+        </div>
+
+        <div class="question" data-answer="b">
+          <p><strong>5. What is the name of the 31-acre central park?</strong></p>
+          <label><input type="radio" name="q5" value="a"> a) Taman Tasik Shah Alam</label><br>
+          <label><input type="radio" name="q5" value="b"> b) LakePoint Park</label><br>
+          <label><input type="radio" name="q5" value="c"> c) Central Lake Garden</label><br>
+          <label><input type="radio" name="q5" value="d"> d) Impian Green Lung</label>
+        </div>
+
+        <div class="question" data-answer="b">
+          <p><strong>6. What unique feature happens at the central park on weekends?</strong></p>
+          <label><input type="radio" name="q6" value="a"> a) Firework display</label><br>
+          <label><input type="radio" name="q6" value="b"> b) Musical fountain</label><br>
+          <label><input type="radio" name="q6" value="c"> c) Laser show</label><br>
+          <label><input type="radio" name="q6" value="d"> d) Drone light show</label>
+        </div>
+
+        <div class="question" data-answer="b">
+          <p><strong>7. Which art element is integrated throughout the township?</strong></p>
+          <label><input type="radio" name="q7" value="a"> a) Sculptural gardens only</label><br>
+          <label><input type="radio" name="q7" value="b"> b) Graffiti walls and street art</label><br>
+          <label><input type="radio" name="q7" value="c"> c) Digital art projections</label><br>
+          <label><input type="radio" name="q7" value="d"> d) Classical art museums</label>
+        </div>
+
+        <div class="question" data-answer="b">
+          <p><strong>8. What type of pool is at the LakePoint Club?</strong></p>
+          <label><input type="radio" name="q8" value="a"> a) Mini pool</label><br>
+          <label><input type="radio" name="q8" value="b"> b) Olympic-size swimming pool</label><br>
+          <label><input type="radio" name="q8" value="c"> c) Natural lake</label><br>
+          <label><input type="radio" name="q8" value="d"> d) Heated indoor pool</label>
+        </div>
+
+        <br>
+        <button type="submit">🚀 Submit Quiz</button>
+        <p id="tamanAlamImpian-result"></p>
+        <button type="button" onclick="resetQuiz('tamanAlamImpianQuiz', 'tamanAlamImpian-result')" id="tamanAlamImpianRetryBtn" style="display:none;">🔄 Try Again</button>
+      </form>
+    </div>
+
+    <div class="chatbot-container">
+        <h3>💬 Ask Our Green Info Bot!</h3>
+        <div class="chat-display" id="chatDisplay">
+            <div class="chat-message bot">Hello! I'm your Green Info Bot. Ask me anything about Elmina Central Park, Bukit Kerinchi Forest Park, or Taman Alam Impian!</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Type your question here...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+	<div class="pledge-btn">
+      <button onclick="takePledge()">💚 Take the Green Pledge</button>
+    </div>
+
+  </div>
+
+  <div class="back-btn">
+    <a href="index.html">⬅ Back to Main Page</a>
+  </div>
+
+  <div id="customModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="hideModal()">&times;</button>
+      <h3 id="modalTitle"></h3>
+      <p id="modalMessage"></p>
+      <div class="modal-buttons">
+        </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Modal Functions (Re-used for consistency) ---
+    const customModal = document.getElementById('customModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalButtons = customModal.querySelector('.modal-buttons');
+
+    function showModal(title, messageHtml, buttons) {
+      modalTitle.textContent = title;
+      modalMessage.innerHTML = messageHtml;
+      modalButtons.innerHTML = '';
+
+      if (buttons && buttons.length > 0) {
+        buttons.forEach(btn => {
+          const buttonElement = document.createElement('button');
+          buttonElement.textContent = btn.text;
+          buttonElement.className = btn.className;
+          buttonElement.onclick = () => {
+            hideModal();
+            if (btn.handler) {
+              btn.handler();
+            }
+          };
+          modalButtons.appendChild(buttonElement);
+        });
+      }
+
+      customModal.classList.add('visible');
+      const firstFocusableElement = modalButtons.querySelector('button') || customModal.querySelector('.modal-close-btn');
+      if (firstFocusableElement) {
+          firstFocusableElement.focus();
+      }
+    }
+
+    function hideModal() {
+      customModal.classList.remove('visible');
+    }
+
+    function showMessageModal(title, message, type = 'info') {
+        let buttonText = 'OK';
+        let buttonClass = 'primary';
+        if (type === 'error') {
+            buttonClass = 'secondary';
+        }
+        showModal(title, `<p>${message}</p>`, [{ text: buttonText, className: buttonClass, handler: null }]);
+    }
+
+    function showConfirmModal(title, message, onConfirmCallback) {
+        showModal(title, `<p>${message}</p>`, [
+            { text: 'Yes, I Pledge!', className: 'primary', handler: onConfirmCallback },
+            { text: 'No, Cancel', className: 'secondary', handler: null }
+        ]);
+    }
+    // --- End Modal Functions ---
+
+    // --- Progress Bar Script (Enhanced) ---
+    const progressBar = document.getElementById("progressBar");
+    const scrollProgressText = document.getElementById("scrollProgressText");
+
+    window.onscroll = function() {
+      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrolled = (winScroll / height) * 100;
+      progressBar.style.width = scrolled + "%";
+      scrollProgressText.textContent = `Progress: ${Math.round(scrolled)}%`;
+    };
+    // --- End Progress Bar Script ---
+
+    // --- Quiz Functions ---
+    function checkAnswers(quizId, resultId) {
+      let questions = document.querySelectorAll(`#${quizId} .question`);
+      let score = 0;
+      let allAnswered = true; // Track if all questions are answered
+
+      questions.forEach((q, index) => {
+        const correct = q.getAttribute("data-answer");
+        const selected = q.querySelector('input[type="radio"]:checked');
+
+        // Remove previous highlights
+        q.style.backgroundColor = ""; // Reset background color
+
+        if (selected) {
+          if (selected.value === correct) {
+            score++;
+            q.style.backgroundColor = "#d4edda"; // light green for correct
+          } else {
+            q.style.backgroundColor = "#f8d7da"; // light red for incorrect
+          }
+        } else {
+          q.style.backgroundColor = "#fff3cd"; // light yellow if unanswered
+          allAnswered = false; // Mark that not all questions are unanswered
+        }
+      });
+
+      const result = document.getElementById(resultId);
+      const retryBtn = document.getElementById(quizId.replace('Quiz', 'RetryBtn'));
+
+      if (!allAnswered) {
+        showMessageModal('Incomplete Quiz!', 'Please answer all questions before submitting.', 'error');
+        result.innerHTML = `Please complete all questions.`;
+        retryBtn.style.display = "none";
+        return; // Stop function if not all questions are answered
+      }
+
+      if (score === questions.length) {
+        result.innerHTML = `🎉 Perfect! You got all ${score}/${questions.length} correct!`;
+        // Optional: show a confetti animation here if you integrate one
+        showMessageModal('Quiz Complete!', 'Amazing! You got all answers correct! 🥳', 'success');
+      } else if (score >= questions.length / 2) {
+        result.innerHTML = `👏 Great job! You scored ${score}/${questions.length}.`;
+        showMessageModal('Quiz Complete!', 'Well done! You have a good understanding of the park!', 'info');
+      } else {
+        result.innerHTML = `💡 You scored ${score}/${questions.length}. Try again and learn more!`;
+        showMessageModal('Quiz Complete!', 'You did well! Review the information and try again to improve your score.', 'info');
+      }
+
+      retryBtn.style.display = "inline-block";
+    }
+
+    function resetQuiz(quizId, resultId) {
+      document.getElementById(quizId).reset();
+      document.getElementById(resultId).innerHTML = "";
+      document.getElementById(quizId.replace('Quiz', 'RetryBtn')).style.display = "none";
+      // Reset background color for all questions
+      document.querySelectorAll(`#${quizId} .question`).forEach(q => q.style.backgroundColor = "");
+    }
+
+    // Attach submit event listeners to quiz forms
+    document.getElementById("elminaQuiz").addEventListener("submit", function(e) {
+      e.preventDefault();
+      checkAnswers('elminaQuiz', 'elmina-result');
+    });
+
+    document.getElementById("bukitKerinchiQuiz").addEventListener("submit", function(e) {
+      e.preventDefault();
+      checkAnswers('bukitKerinchiQuiz', 'bukitKerinchi-result');
+    });
+
+    document.getElementById("tamanAlamImpianQuiz").addEventListener("submit", function(e) {
+      e.preventDefault();
+      checkAnswers('tamanAlamImpianQuiz', 'tamanAlamImpian-result');
+    });
+    // --- End Quiz Functions ---
+
+    // --- Green Pledge Modal ---
+    function takePledge() {
+        showConfirmModal(
+            'Join the Green Pledge!',
+            'Are you ready to commit to making a positive impact on our environment by taking the Green Pledge?',
+            () => {
+                showMessageModal('Pledge Taken!', '🌿 Thank you for pledging to live greener! Together, we can make a difference! 🌎💚', 'success');
+            }
+        );
+    }
+    // --- End Green Pledge Modal ---
+
+    // --- Interactive Fun Facts ---
+    const parkFunFacts = {
+        elmina: [
+            "Did you know Elmina was once a rubber research land before becoming a wellness city?",
+            "No native rainforest was removed during Elmina's development – a win for sustainability!",
+            "Elmina's smart flood zone design can handle 1,000-year floods!",
+            "The iconic red bridge at Elmina is a favorite spot for social media photos!"
+        ],
+        bukitKerinchi: [
+            "Bukit Kerinchi Forest Park is part of a larger 252-acre forest, including Bukit Gasing!",
+            "It's a crucial water catchment area for Kuala Lumpur.",
+            "The park is home to 46 surveyed bird species, monkeys, and other wildlife!",
+            "There are ongoing rewilding efforts by DBKL to plant indigenous trees."
+        ],
+        tamanAlamImpian: [
+            "Taman Alam Impian is known as 'The City of Arts' with integrated art pieces and graffiti walls.",
+            "Its LakePoint Park features a musical fountain on weekends!",
+            "Over 2,000 trees have been planted in Taman Alam Impian.",
+            "Every housing precinct in Taman Alam Impian has its own recreational area!"
+        ]
+    };
+
+    function showParkFunFact(parkName) {
+        const facts = parkFunFacts[parkName];
+        if (facts && facts.length > 0) {
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            const randomFact = facts[randomIndex];
+            showMessageModal(`Fun Fact about ${parkName.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}!`, randomFact, 'info');
+        } else {
+            showMessageModal('No Fun Facts', 'No fun facts available for this park yet!', 'info');
+        }
+    }
+    // --- End Interactive Fun Facts ---
+
+    // --- Chatbot Logic ---
+    const chatDisplay = document.getElementById('chatDisplay');
+    const chatInput = document.getElementById('chatInput');
+
+    // Knowledge base for the chatbot - parsed from the original text
+    const parkInfo = {
+        elmina: {
+            name: "Elmina Central Park",
+            location: "Elmina, Shah Alam, Selangor. Size: ~300 acres. Part of the massive 6,500-acre City of Elmina township.",
+            overview: "A wellness-focused park developed by Sime Darby Property, blending health, nature, and sustainability into a vibrant outdoor sanctuary.",
+            features: "Iconic red bridge, Rainbow Walkway, 90km of jogging & cycling tracks, Inclusive Playground (in partnership with UNICEF), Themed Community Parks (Forest Park, Urban Park).",
+            sustainability: "Rainforest Knowledge Centre, 100+ native species planted (including endangered and rare trees), Smart flood zone design handling 1,000-year floods.",
+            facilities: "Clean restrooms, shady spots, limited parking (come early on weekends!), Insta-worthy corners, best to visit early morning or sunset, FREE entry, some areas allow pets (check signs).",
+            funFacts: "Once a rubber research land, now a wellness city oasis! No native rainforest was removed during development."
+        },
+        bukitKerinchi: {
+            name: "Bukit Kerinchi Forest Park",
+            location: "Bukit Kerinchi, 59200 Kuala Lumpur. Size: ~66.15 hectares (part of a larger 252-acre forest including Bukit Gasing).",
+            overview: "A significant green lung in Kuala Lumpur, offering a natural escape and often considered the KL gateway to Bukit Gasing. Gazetted in 2012 by the Minister of Federal Territories.",
+            features: "Hiking Trails (including 'Stairway to Heaven'), Suspension Bridge, Wildlife Sightings (monkeys, 46 bird species, amphibians, reptiles, small mammals), Lush Secondary Rainforest, New Urban Park (part of Pantai Sentral Park, 'Ribbon of Life' pathway).",
+            sustainability: "Crucial water catchment area, ongoing rewilding efforts by DBKL (planting indigenous trees, restoring flora/fauna), biodiversity-friendly landscaping (pollinator gardens).",
+            facilities: "Public toilets (may require small fee), designated camping area (with pre-arranged permits), limited designated parking (roadside common), best to visit early to avoid crowds, FREE entry, be cautious of monkeys, check weather (muddy after rain), bring water, snacks, insect repellent, comfortable hiking shoes.",
+            funFacts: "Area was once a rubber estate. Kampung Kerinchi community traditionally harvested bamboo. Seamlessly connected to Bukit Gasing Forest Reserve for extended trails."
+        },
+        tamanAlamImpian: {
+            name: "Taman Alam Impian",
+            location: "Seksyen 35, 40470 Shah Alam, Selangor. Strategically located ~8km from Shah Alam city center.",
+            overview: "A unique 1,235-acre freehold township, initially by Naza TTDI Sdn Bhd and now under S P Setia Berhad, built on the concept of 'Where Nature Embraces Art.'",
+            features: "LakePoint Park (31 acres, musical fountain on weekends), Art-Inspired Living (integrated art pieces, graffiti walls, street art, art gallery), Linear Parks & Green Spaces, LakePoint Club (Olympic-size pool, lake-view gym), Town Centre & Retail (Impian Prisma), Themed Precincts (named after art genres).",
+            sustainability: "Over 2,000 trees planted, water features and green infrastructure, wide nature strips and green buffer zones.",
+            facilities: "Public parks generally open daily, clubhouse access for members, FREE entry to public parks, ample parking, easily accessible via LKSA, KESAS, Federal Highway, ELITE, West Coast Highway (future), limited direct public transport (nearby KTM accessible by car), gated and guarded precincts, close proximity to schools, medical centers, shopping malls.",
+            funFacts: "First launched in 2006. Features numerous outdoor artworks and graffiti walls. Property values expected to appreciate. Every guarded housing precinct has its own recreational area."
+        }
+    };
+
+    function appendMessage(sender, message) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('chat-message', sender);
+        messageDiv.textContent = message;
+        chatDisplay.appendChild(messageDiv);
+        chatDisplay.scrollTop = chatDisplay.scrollHeight; // Auto-scroll to bottom
+    }
+
+    function getBotResponse(userMessage) {
+        const lowerCaseMessage = userMessage.toLowerCase();
+        let response = "I'm sorry, I can only provide information about Elmina Central Park, Bukit Kerinchi Forest Park, and Taman Alam Impian. Could you please rephrase your question or ask about one of these locations?";
+        let found = false;
+
+        for (const parkKey in parkInfo) {
+            const park = parkInfo[parkKey];
+            const parkNameLower = park.name.toLowerCase();
+
+            if (lowerCaseMessage.includes(parkNameLower.split(':')[0].toLowerCase()) || lowerCaseMessage.includes(parkKey.toLowerCase().replace('bukitkerinchi', 'bukit kerinchi').replace('tamanaimipian', 'taman alam impian'))) {
+                found = true;
+                if (lowerCaseMessage.includes('location') || lowerCaseMessage.includes('where')) {
+                    response = `The location of ${park.name} is: ${park.location}`;
+                } else if (lowerCaseMessage.includes('size') || lowerCaseMessage.includes('how big')) {
+                     response = `${park.name} is ${park.location.match(/Size: ~?([0-9.]+)\s*(acres|hectares)/i)?.[0] || park.location.match(/(\d+,?\d*\s*(?:acres|hectares))/i)?.[0] || 'not specified in detail in the provided info.'}.`;
+                }
+                else if (lowerCaseMessage.includes('features') || lowerCaseMessage.includes('attractions')) {
+                    response = `Some key features and attractions of ${park.name} include: ${park.features}`;
+                } else if (lowerCaseMessage.includes('sustainability') || lowerCaseMessage.includes('environment') || lowerCaseMessage.includes('nature')) {
+                    response = `Regarding nature and sustainability at ${park.name}: ${park.sustainability}`;
+                } else if (lowerCaseMessage.includes('facilities') || lowerCaseMessage.includes('tips') || lowerCaseMessage.includes('visit')) {
+                    response = `Here are some facilities and tips for visiting ${park.name}: ${park.facilities}`;
+                } else if (lowerCaseMessage.includes('fun fact') || lowerCaseMessage.includes('interesting')) {
+                     response = `Here's a fun fact about ${park.name}: ${park.funFacts}`;
+                } else if (lowerCaseMessage.includes('overview') || lowerCaseMessage.includes('about')) {
+                    response = `Overview of ${park.name}: ${park.overview}`;
+                }
+                else {
+                    response = `I found information about ${park.name}. What specifically would you like to know (e.g., location, features, sustainability, facilities, fun facts)?`;
+                }
+                break;
+            }
+        }
+
+        if (!found && (lowerCaseMessage.includes('hello') || lowerCaseMessage.includes('hi'))) {
+            response = "Hello! I'm your Green Info Bot. How can I help you today regarding Elmina Central Park, Bukit Kerinchi Forest Park, or Taman Alam Impian?";
+        } else if (!found && (lowerCaseMessage.includes('thank you') || lowerCaseMessage.includes('thanks'))) {
+            response = "You're welcome! Feel free to ask if you have more questions.";
+        }
+
+        return response;
+    }
+
+    function sendMessage() {
+        const userMessage = chatInput.value.trim();
+        if (userMessage === '') return;
+
+        appendMessage('user', userMessage);
+        chatInput.value = '';
+
+        setTimeout(() => {
+            const botResponse = getBotResponse(userMessage);
+            appendMessage('bot', botResponse);
+        }, 500); // Simulate typing delay
+    }
+
+    chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+    // --- End Chatbot Logic ---
+
+  </script>
+</body>
+</html>
